@@ -6,6 +6,7 @@ target 'Freelancer' do
   use_frameworks!
 
   # Pods for Freelancer
+  pod 'CocoaLumberjack', '~> 3.0'
 
   target 'FreelancerTests' do
     inherit! :search_paths
