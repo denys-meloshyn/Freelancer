@@ -8,11 +8,11 @@
 
 import UIKit
 import CoreData
+import CocoaLumberjack
 
 protocol ProjectsInteractionDelegate: class {
     func didChangeContent()
     func willChangeContent()
-    func showCreateNewEvenDialog()
     func changed(at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?)
 }
 
@@ -62,5 +62,11 @@ class ProjectsInteraction: NSObject, NSFetchedResultsControllerDelegate {
     
     func saveProjectChanges() {
         ModelManager.sharedInstance.saveContext(ModelManager.sharedInstance.managedObjectContext)
+    }
+    
+    func model(for indexPath: IndexPath) -> Project {
+        let event = self.fetchedResultsController.object(at: indexPath)
+        
+        return event
     }
 }

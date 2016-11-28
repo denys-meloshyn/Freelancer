@@ -7,15 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
 protocol ProjectsPresenterDelegate: class {
     func cancelEdit()
+    func contentDidChange()
+    func contentWillChange()
+    func createCell(with title: String?, and detailText: String?) -> UITableViewCell?
+    func contentChanged(at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?)
     func showCreateNewProjectDialog(with title:String, message messageText: String, create createTitle: String, cancel cancelTitle: String)
 }
 
-class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource {
+class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, ProjectsInteractionDelegate {
     let interaction = ProjectsInteraction()
     weak var delegate: ProjectsPresenterDelegate?
+    
+    func initialConfiguration() {
+//        self.router.viewController = self.viewController
+        self.interaction.initialConfiguration()
+        self.interaction.delegate = self
+    }
     
     // MARK: - UITableViewDataSource methods
     
@@ -24,14 +35,13 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //    var cell: UITableViewCell?
-        //
-        //    guard let cell = cell else {
-        //        return UITableViewCell()
-        //    }
-        //
-        //    return cell
-        return UITableViewCell()
+        let project = self.interaction.model(for: indexPath)
+        
+        guard let cell = self.delegate?.createCell(with: project.title, and: "asd") else {
+            return UITableViewCell()
+        }
+        
+        return cell
     }
     
     // MARK: - UITableViewDelegate methods
@@ -96,7 +106,33 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource {
         return handler
     }
     
+    func titleEditHandler(with alertAction: UIAlertAction) -> ((UITextField) -> Swift.Void)? {
+        let handler = {(textField: UITextField) in
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { (notification) in
+                alertAction.isEnabled = self.isTitleValid(textField.text)
+            }
+            
+            return
+        }
+        
+        return handler
+    }
+    
     func showCreateNewProjectDialog() {
         self.delegate?.showCreateNewProjectDialog(with: "Project", message: "Create new project", create: "Create", cancel: "Cancel")
+    }
+    
+    // MARK: - ProjectsInteractionDelegate methods
+    
+    func willChangeContent() {
+        self.delegate?.contentWillChange()
+    }
+    
+    func didChangeContent() {
+        self.delegate?.contentDidChange()
+    }
+    
+    func changed(at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        self.delegate?.contentChanged(at: indexPath, for: type, newIndexPath: newIndexPath)
     }
 }
