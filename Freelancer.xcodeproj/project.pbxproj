@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1915D2E518987B20ADE337EF /* Pods_FreelancerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCFB66C56434B8738BCB1DB7 /* Pods_FreelancerUITests.framework */; };
 		5764D7221DEC8B3D0084E1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7211DEC8B3D0084E1EF /* AppDelegate.swift */; };
-		5764D7241DEC8B3D0084E1EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7231DEC8B3D0084E1EF /* ViewController.swift */; };
 		5764D7271DEC8B3D0084E1EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5764D7251DEC8B3D0084E1EF /* Main.storyboard */; };
 		5764D72A1DEC8B3D0084E1EF /* Freelancer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7281DEC8B3D0084E1EF /* Freelancer.xcdatamodeld */; };
 		5764D72C1DEC8B3D0084E1EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5764D72B1DEC8B3D0084E1EF /* Assets.xcassets */; };
@@ -17,6 +16,14 @@
 		5764D73A1DEC8B3D0084E1EF /* FreelancerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7391DEC8B3D0084E1EF /* FreelancerTests.swift */; };
 		5764D7451DEC8B3D0084E1EF /* FreelancerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7441DEC8B3D0084E1EF /* FreelancerUITests.swift */; };
 		5764D7561DEC97A00084E1EF /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7551DEC97A00084E1EF /* ProjectsViewController.swift */; };
+		5764D7591DEC9C9A0084E1EF /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7581DEC9C9A0084E1EF /* ModelManager.swift */; };
+		5764D75E1DEC9DBE0084E1EF /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D75D1DEC9DBE0084E1EF /* ProjectsView.swift */; };
+		5764D7601DEC9EAD0084E1EF /* ProjectsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D75F1DEC9EAD0084E1EF /* ProjectsPresenter.swift */; };
+		5764D7621DECA0980084E1EF /* ProjectsInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7611DECA0980084E1EF /* ProjectsInteraction.swift */; };
+		57FCF7C71DECAFDB001C6480 /* LoggedTime+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FCF7C31DECAFDB001C6480 /* LoggedTime+CoreDataClass.swift */; };
+		57FCF7C81DECAFDB001C6480 /* LoggedTime+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FCF7C41DECAFDB001C6480 /* LoggedTime+CoreDataProperties.swift */; };
+		57FCF7C91DECAFDB001C6480 /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FCF7C51DECAFDB001C6480 /* Project+CoreDataClass.swift */; };
+		57FCF7CA1DECAFDB001C6480 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FCF7C61DECAFDB001C6480 /* Project+CoreDataProperties.swift */; };
 		75CBF87C216C36654C5E2181 /* Pods_Freelancer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8C942FC04A93FAF27D871FC /* Pods_Freelancer.framework */; };
 		9B0AA97230F45F28954548A4 /* Pods_FreelancerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E26DE291A8E4CE0AB846040 /* Pods_FreelancerTests.framework */; };
 /* End PBXBuildFile section */
@@ -43,7 +50,6 @@
 		3E26DE291A8E4CE0AB846040 /* Pods_FreelancerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreelancerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5764D71E1DEC8B3D0084E1EF /* Freelancer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Freelancer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5764D7211DEC8B3D0084E1EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5764D7231DEC8B3D0084E1EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5764D7261DEC8B3D0084E1EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5764D7291DEC8B3D0084E1EF /* Freelancer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Freelancer.xcdatamodel; sourceTree = "<group>"; };
 		5764D72B1DEC8B3D0084E1EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,6 +62,14 @@
 		5764D7441DEC8B3D0084E1EF /* FreelancerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreelancerUITests.swift; sourceTree = "<group>"; };
 		5764D7461DEC8B3D0084E1EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5764D7551DEC97A00084E1EF /* ProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
+		5764D7581DEC9C9A0084E1EF /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		5764D75D1DEC9DBE0084E1EF /* ProjectsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
+		5764D75F1DEC9EAD0084E1EF /* ProjectsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsPresenter.swift; sourceTree = "<group>"; };
+		5764D7611DECA0980084E1EF /* ProjectsInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsInteraction.swift; sourceTree = "<group>"; };
+		57FCF7C31DECAFDB001C6480 /* LoggedTime+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoggedTime+CoreDataClass.swift"; sourceTree = "<group>"; };
+		57FCF7C41DECAFDB001C6480 /* LoggedTime+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoggedTime+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		57FCF7C51DECAFDB001C6480 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
+		57FCF7C61DECAFDB001C6480 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7C5DE5146E6FF74AF278D2C1 /* Pods-Freelancer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freelancer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Freelancer/Pods-Freelancer.release.xcconfig"; sourceTree = "<group>"; };
 		C5617284D0D3A159F3A0D45E /* Pods-Freelancer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freelancer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Freelancer/Pods-Freelancer.debug.xcconfig"; sourceTree = "<group>"; };
 		CCFB66C56434B8738BCB1DB7 /* Pods_FreelancerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreelancerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +143,11 @@
 			isa = PBXGroup;
 			children = (
 				5764D7211DEC8B3D0084E1EF /* AppDelegate.swift */,
+				5764D75C1DEC9D8D0084E1EF /* Interaction */,
+				5764D7571DEC9C530084E1EF /* ModelManager */,
+				5764D75B1DEC9D860084E1EF /* Presenter */,
 				5764D7531DEC958E0084E1EF /* Resource */,
+				5764D75A1DEC9D800084E1EF /* View */,
 				5764D7521DEC957C0084E1EF /* ViewController */,
 			);
 			path = Freelancer;
@@ -156,7 +174,6 @@
 		5764D7521DEC957C0084E1EF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5764D7231DEC8B3D0084E1EF /* ViewController.swift */,
 				5764D7551DEC97A00084E1EF /* ProjectsViewController.swift */,
 			);
 			name = ViewController;
@@ -180,6 +197,42 @@
 				5764D72D1DEC8B3D0084E1EF /* LaunchScreen.storyboard */,
 			);
 			name = Xib;
+			sourceTree = "<group>";
+		};
+		5764D7571DEC9C530084E1EF /* ModelManager */ = {
+			isa = PBXGroup;
+			children = (
+				57FCF7C31DECAFDB001C6480 /* LoggedTime+CoreDataClass.swift */,
+				57FCF7C41DECAFDB001C6480 /* LoggedTime+CoreDataProperties.swift */,
+				57FCF7C51DECAFDB001C6480 /* Project+CoreDataClass.swift */,
+				57FCF7C61DECAFDB001C6480 /* Project+CoreDataProperties.swift */,
+				5764D7581DEC9C9A0084E1EF /* ModelManager.swift */,
+			);
+			name = ModelManager;
+			sourceTree = "<group>";
+		};
+		5764D75A1DEC9D800084E1EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5764D75D1DEC9DBE0084E1EF /* ProjectsView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		5764D75B1DEC9D860084E1EF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				5764D75F1DEC9EAD0084E1EF /* ProjectsPresenter.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		5764D75C1DEC9D8D0084E1EF /* Interaction */ = {
+			isa = PBXGroup;
+			children = (
+				5764D7611DECA0980084E1EF /* ProjectsInteraction.swift */,
+			);
+			name = Interaction;
 			sourceTree = "<group>";
 		};
 		C0FB571DDC9D76AE0F8056D1 /* Pods */ = {
@@ -476,10 +529,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5764D7621DECA0980084E1EF /* ProjectsInteraction.swift in Sources */,
+				5764D75E1DEC9DBE0084E1EF /* ProjectsView.swift in Sources */,
 				5764D7561DEC97A00084E1EF /* ProjectsViewController.swift in Sources */,
+				5764D7591DEC9C9A0084E1EF /* ModelManager.swift in Sources */,
 				5764D72A1DEC8B3D0084E1EF /* Freelancer.xcdatamodeld in Sources */,
-				5764D7241DEC8B3D0084E1EF /* ViewController.swift in Sources */,
+				5764D7601DEC9EAD0084E1EF /* ProjectsPresenter.swift in Sources */,
+				57FCF7C71DECAFDB001C6480 /* LoggedTime+CoreDataClass.swift in Sources */,
 				5764D7221DEC8B3D0084E1EF /* AppDelegate.swift in Sources */,
+				57FCF7CA1DECAFDB001C6480 /* Project+CoreDataProperties.swift in Sources */,
+				57FCF7C81DECAFDB001C6480 /* LoggedTime+CoreDataProperties.swift in Sources */,
+				57FCF7C91DECAFDB001C6480 /* Project+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +612,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -601,6 +662,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
