@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -159,7 +160,7 @@
             </objects>
             <point key="canvasLocation" x="2279" y="-609"/>
         </scene>
-        <!--Time Edit View Controller-->
+        <!--View Controller-->
         <scene sceneID="DHr-tI-dGs">
             <objects>
                 <viewController storyboardIdentifier="TimeEditViewController" id="dqx-DT-Yxt" customClass="TimeEditViewController" customModule="Freelancer" customModuleProvider="target" sceneMemberID="viewController">
@@ -170,12 +171,66 @@
                     <view key="view" contentMode="scaleToFill" id="kjJ-hR-cAi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUa-Up-Ccy">
+                                <rect key="frame" x="16" y="95" width="343" height="66"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="55"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zj2-rK-uzs">
+                                <rect key="frame" x="16" y="169" width="343" height="50"/>
+                                <color key="backgroundColor" red="0.11810057" green="0.84383726029999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="oMY-dz-ThE"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLQ-dr-nHi">
+                                <rect key="frame" x="16" y="28" width="43" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cM4-kK-V6K">
+                                <rect key="frame" x="16" y="57" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GUa-Up-Ccy" firstAttribute="top" secondItem="cM4-kK-V6K" secondAttribute="bottom" constant="8" id="4t9-RA-f1t"/>
+                            <constraint firstItem="rLQ-dr-nHi" firstAttribute="top" secondItem="l7N-c0-Ubj" secondAttribute="bottom" constant="8" id="8Ry-md-lhR"/>
+                            <constraint firstItem="cM4-kK-V6K" firstAttribute="trailing" secondItem="kjJ-hR-cAi" secondAttribute="trailingMargin" id="NXf-Wx-GrH"/>
+                            <constraint firstAttribute="trailing" secondItem="GUa-Up-Ccy" secondAttribute="trailing" constant="16" id="TWk-Wi-SZ8"/>
+                            <constraint firstItem="zj2-rK-uzs" firstAttribute="top" secondItem="GUa-Up-Ccy" secondAttribute="bottom" constant="8" id="Uym-aW-NDK"/>
+                            <constraint firstAttribute="trailing" secondItem="zj2-rK-uzs" secondAttribute="trailing" constant="16" id="X2h-KP-eSV"/>
+                            <constraint firstItem="rLQ-dr-nHi" firstAttribute="leading" secondItem="kjJ-hR-cAi" secondAttribute="leadingMargin" id="YeY-WE-myJ"/>
+                            <constraint firstItem="zj2-rK-uzs" firstAttribute="leading" secondItem="kjJ-hR-cAi" secondAttribute="leading" constant="16" id="crA-Bq-iUd"/>
+                            <constraint firstItem="cM4-kK-V6K" firstAttribute="leading" secondItem="kjJ-hR-cAi" secondAttribute="leadingMargin" id="k0g-6Q-CKR"/>
+                            <constraint firstItem="cM4-kK-V6K" firstAttribute="top" secondItem="rLQ-dr-nHi" secondAttribute="bottom" constant="8" id="rOK-I1-xRt"/>
+                            <constraint firstItem="GUa-Up-Ccy" firstAttribute="leading" secondItem="kjJ-hR-cAi" secondAttribute="leading" constant="16" id="z5o-op-UnL"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="timeEditView" destination="Hs4-Ne-CqZ" id="o35-13-tyg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4F-hL-QPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Hs4-Ne-CqZ" customClass="TimeEditView" customModule="Freelancer" customModuleProvider="target">
+                    <connections>
+                        <outlet property="runButton" destination="zj2-rK-uzs" id="5bZ-hg-D9j"/>
+                        <outlet property="timeLabel" destination="GUa-Up-Ccy" id="PjT-Tn-Q8g"/>
+                        <outlet property="titleTextField" destination="cM4-kK-V6K" id="6hM-9S-9rI"/>
+                        <outlet property="viewController" destination="dqx-DT-Yxt" id="iwP-TY-837"/>
+                    </connections>
+                </customObject>
             </objects>
-            <point key="canvasLocation" x="3055" y="-609"/>
+            <point key="canvasLocation" x="3053.5999999999999" y="-609.44527736131943"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="8IK-MN-zY3">

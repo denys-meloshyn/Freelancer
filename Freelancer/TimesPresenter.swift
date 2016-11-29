@@ -45,8 +45,10 @@ class TimesPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, Cont
         let time = self.interaction.time(for: indexPath)
 
         var spentTime = ""
-        if let date = time?.spent()?.date {
+        let calendar = Calendar.current
+        if let dateComponents = time?.spent(), let date = calendar.date(from: dateComponents) {
             let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm:ss"
             spentTime = formatter.string(from: date)
         }
 

@@ -15,6 +15,9 @@
 		5702177B1DED79C100A0F0FC /* TimesInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702177A1DED79C100A0F0FC /* TimesInteraction.swift */; };
 		5702177D1DED7EE300A0F0FC /* TimeEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702177C1DED7EE300A0F0FC /* TimeEditViewController.swift */; };
 		5702177F1DED7FC100A0F0FC /* TimeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5702177E1DED7FC100A0F0FC /* TimeRouter.swift */; };
+		570217811DEDA20900A0F0FC /* TimeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570217801DEDA20900A0F0FC /* TimeEditView.swift */; };
+		570217831DEDA83D00A0F0FC /* TimeEditPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570217821DEDA83D00A0F0FC /* TimeEditPresenter.swift */; };
+		570217851DEDC44B00A0F0FC /* TimeEditInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570217841DEDC44B00A0F0FC /* TimeEditInteraction.swift */; };
 		5764D7221DEC8B3D0084E1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7211DEC8B3D0084E1EF /* AppDelegate.swift */; };
 		5764D7271DEC8B3D0084E1EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5764D7251DEC8B3D0084E1EF /* Main.storyboard */; };
 		5764D72A1DEC8B3D0084E1EF /* Freelancer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7281DEC8B3D0084E1EF /* Freelancer.xcdatamodeld */; };
@@ -62,6 +65,9 @@
 		5702177A1DED79C100A0F0FC /* TimesInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesInteraction.swift; sourceTree = "<group>"; };
 		5702177C1DED7EE300A0F0FC /* TimeEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEditViewController.swift; sourceTree = "<group>"; };
 		5702177E1DED7FC100A0F0FC /* TimeRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeRouter.swift; sourceTree = "<group>"; };
+		570217801DEDA20900A0F0FC /* TimeEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEditView.swift; sourceTree = "<group>"; };
+		570217821DEDA83D00A0F0FC /* TimeEditPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEditPresenter.swift; sourceTree = "<group>"; };
+		570217841DEDC44B00A0F0FC /* TimeEditInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeEditInteraction.swift; sourceTree = "<group>"; };
 		5764D71E1DEC8B3D0084E1EF /* Freelancer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Freelancer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5764D7211DEC8B3D0084E1EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5764D7261DEC8B3D0084E1EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -241,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				5764D75D1DEC9DBE0084E1EF /* ProjectsView.swift */,
+				570217801DEDA20900A0F0FC /* TimeEditView.swift */,
 				570217761DED762B00A0F0FC /* TimesView.swift */,
 			);
 			name = View;
@@ -250,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				5764D75F1DEC9EAD0084E1EF /* ProjectsPresenter.swift */,
+				570217821DEDA83D00A0F0FC /* TimeEditPresenter.swift */,
 				570217781DED78C600A0F0FC /* TimesPresenter.swift */,
 			);
 			name = Presenter;
@@ -259,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				5764D7611DECA0980084E1EF /* ProjectsInteraction.swift */,
+				570217841DEDC44B00A0F0FC /* TimeEditInteraction.swift */,
 				5702177A1DED79C100A0F0FC /* TimesInteraction.swift */,
 			);
 			name = Interaction;
@@ -560,10 +569,13 @@
 			files = (
 				5764D7621DECA0980084E1EF /* ProjectsInteraction.swift in Sources */,
 				5702177F1DED7FC100A0F0FC /* TimeRouter.swift in Sources */,
+				570217811DEDA20900A0F0FC /* TimeEditView.swift in Sources */,
 				570217721DED641D00A0F0FC /* TimesViewController.swift in Sources */,
 				5764D75E1DEC9DBE0084E1EF /* ProjectsView.swift in Sources */,
 				5702177B1DED79C100A0F0FC /* TimesInteraction.swift in Sources */,
 				5764D7561DEC97A00084E1EF /* ProjectsViewController.swift in Sources */,
+				570217831DEDA83D00A0F0FC /* TimeEditPresenter.swift in Sources */,
+				570217851DEDC44B00A0F0FC /* TimeEditInteraction.swift in Sources */,
 				5764D7591DEC9C9A0084E1EF /* ModelManager.swift in Sources */,
 				5702177D1DED7EE300A0F0FC /* TimeEditViewController.swift in Sources */,
 				5764D72A1DEC8B3D0084E1EF /* Freelancer.xcdatamodeld in Sources */,

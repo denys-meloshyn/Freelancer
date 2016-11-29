@@ -43,7 +43,7 @@ class TimesView: NSObject, TimePresenterDelegate {
 
         return deleteAction
     }
-    
+
     func cancelEdit() {
         self.tableView?.isEditing = false
     }
