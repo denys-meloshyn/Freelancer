@@ -16,7 +16,7 @@ extension LoggedTime {
         return NSFetchRequest<LoggedTime>(entityName: "LoggedTime");
     }
 
-    @NSManaged public var spent: NSDate?
+    @NSManaged public var finish: NSDate?
     @NSManaged public var start: NSDate?
     @NSManaged public var title: String?
     @NSManaged public var project: Project?
