@@ -10,10 +10,13 @@ import UIKit
 import CoreData
 import CocoaLumberjack
 
-protocol ProjectsInteractionDelegate: class {
+protocol ContentInteractionDelegate: class {
     func didChangeContent()
     func willChangeContent()
     func changed(at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?)
+}
+
+protocol ProjectsInteractionDelegate: ContentInteractionDelegate {
 }
 
 class ProjectsInteraction: NSObject, NSFetchedResultsControllerDelegate {
@@ -61,13 +64,13 @@ class ProjectsInteraction: NSObject, NSFetchedResultsControllerDelegate {
     }
     
     func saveProjectChanges() {
-        ModelManager.sharedInstance.saveContext(ModelManager.sharedInstance.managedObjectContext)
+        ModelManager.saveContext(ModelManager.sharedInstance.managedObjectContext)
     }
     
     func project(for indexPath: IndexPath) -> Project {
-        let event = self.fetchedResultsController.object(at: indexPath)
+        let project = self.fetchedResultsController.object(at: indexPath)
         
-        return event
+        return project
     }
 
     func delete(_ project: Project) {

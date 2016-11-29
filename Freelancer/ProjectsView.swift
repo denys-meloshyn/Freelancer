@@ -29,9 +29,7 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate {
     private func configureUserInterface() {
         let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self.presenter, action: #selector(ProjectsPresenter.showCreateNewProjectDialog))
         self.viewController?.navigationItem.rightBarButtonItem = addBarButtonItem
-        
-        self.tableView?.estimatedRowHeight = 44.0
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+
         self.tableView?.dataSource = self.presenter
         self.tableView?.delegate = self.presenter
     }
@@ -42,7 +40,7 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate {
         self.tableView?.isEditing = false
     }
     
-    func showCreateNewProjectDialog(with title: String, message messageText: String, create createTitle: String, cancel cancelTitle: String) {
+    func showCreateNewProjectDialog(with title: String, message messageText: String, create createTitle: String, cancel cancelTitle: String, placeholder textPlaceholder: String) {
         let alertController = UIAlertController(title: title, message: messageText, preferredStyle: .alert)
         
         let createAction = UIAlertAction(title: createTitle, style: .default, handler: self.presenter.createHandler(for: alertController))
@@ -57,7 +55,7 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate {
             return
         }
         
-        textField.placeholder = "Create new project"
+        textField.placeholder = textPlaceholder
         textField.autocapitalizationType = .sentences
         
         self.viewController?.present(alertController, animated: true, completion: nil)
@@ -90,15 +88,15 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate {
         return cell
     }
     
-    func contentDidChange() {
+    func didChangeContent() {
         self.tableView?.endUpdates()
     }
     
-    func contentWillChange() {
+    func willChangeContent() {
         self.tableView?.beginUpdates()
     }
     
-    func contentChanged(at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func changed(at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
             if let newIndexPath = newIndexPath {

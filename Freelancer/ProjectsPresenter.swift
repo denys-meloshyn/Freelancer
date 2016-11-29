@@ -9,14 +9,11 @@
 import UIKit
 import CoreData
 
-protocol ProjectsPresenterDelegate: class {
+protocol ProjectsPresenterDelegate: ContentInteractionDelegate {
     func cancelEdit()
-    func contentDidChange()
-    func contentWillChange()
     func createCell(with title: String?, and detailText: String?) -> UITableViewCell?
-    func contentChanged(at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?)
     func showDeleteDialog(with title: String, message: String, cancelTitle: String, deleteTitle: String, indexPath: IndexPath)
-    func showCreateNewProjectDialog(with title:String, message messageText: String, create createTitle: String, cancel cancelTitle: String)
+    func showCreateNewProjectDialog(with title:String, message messageText: String, create createTitle: String, cancel cancelTitle: String, placeholder textPlaceholder: String)
     func createDeleteProjectRowAction(with title: String, and handler: @escaping (UITableViewRowAction, IndexPath) -> Swift.Void) -> UITableViewRowAction
 }
 
@@ -165,20 +162,20 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
     
     func showCreateNewProjectDialog() {
         // TODO: localize messages
-        self.delegate?.showCreateNewProjectDialog(with: "Project", message: "Create new project", create: "Create", cancel: "Cancel")
+        self.delegate?.showCreateNewProjectDialog(with: "Project", message: "Create new project", create: "Create", cancel: "Cancel", placeholder: "Create new project")
     }
     
     // MARK: - ProjectsInteractionDelegate methods
     
     func willChangeContent() {
-        self.delegate?.contentWillChange()
+        self.delegate?.willChangeContent()
     }
     
     func didChangeContent() {
-        self.delegate?.contentDidChange()
+        self.delegate?.didChangeContent()
     }
     
     func changed(at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        self.delegate?.contentChanged(at: indexPath, for: type, newIndexPath: newIndexPath)
+        self.delegate?.changed(at: indexPath, for: type, newIndexPath: newIndexPath)
     }
 }

@@ -47,7 +47,7 @@ class ModelManager {
     
     // MARK: - Core Data Saving support
     
-    func saveContext (_ context: NSManagedObjectContext) {
+    static func saveContext (_ context: NSManagedObjectContext) {
         if context.hasChanges {
             do {
                 try context.save()
@@ -59,11 +59,32 @@ class ModelManager {
             }
         }
     }
-    
+
+    static func saveChildrenManagedObjectContext(_ childrenManagedObjectContext: NSManagedObjectContext) {
+        guard let parentManagedObjectContext = childrenManagedObjectContext.parent else {
+            return
+        }
+
+        childrenManagedObjectContext.perform { () -> Void in
+            ModelManager.saveContext(childrenManagedObjectContext)
+
+            childrenManagedObjectContext.parent?.perform({() -> Void in
+               ModelManager.saveContext(parentManagedObjectContext)
+            })
+        }
+    }
+
     // MARK: - Public methods
-    
+
     var managedObjectContext:NSManagedObjectContext {
         return self.persistentContainer.viewContext
+    }
+
+    static func createChildrenManagedObjectContext(from parentContext: NSManagedObjectContext?) -> NSManagedObjectContext {
+        let childrenManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        childrenManagedObjectContext.parent = parentContext
+
+        return childrenManagedObjectContext
     }
     
     static func projectsFetchedResultController(with managedObjectContext: NSManagedObjectContext) -> NSFetchedResultsController<Project> {
