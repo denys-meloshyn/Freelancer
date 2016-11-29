@@ -12,7 +12,11 @@ import CoreData
 class TimeEditView: NSObject, TimeEditPresenterDelegate {
     @IBOutlet private var timeLabel: UILabel?
     @IBOutlet private var runButton: UIButton?
+    @IBOutlet private var decreseButton: UIButton?
+    @IBOutlet private var increaseButton: UIButton?
+    @IBOutlet private var datePicker: UIDatePicker?
     @IBOutlet private var titleTextField: UITextField?
+    @IBOutlet private var datePickerContainerView: UIView?
     @IBOutlet private weak var viewController: UIViewController?
 
     let presenter = TimeEditPresenter()
@@ -37,9 +41,17 @@ class TimeEditView: NSObject, TimeEditPresenterDelegate {
         
         self.runButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.runStopTimer), for: .touchUpInside)
         self.titleTextField?.addTarget(self.presenter, action: #selector(TimeEditPresenter.titleValueEdited(sender:)), for: .editingChanged)
+        self.increaseButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.increaseButtonHandler), for: .touchUpInside)
+        self.decreseButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.decreaseButtonHandler), for: .touchUpInside)
+        
+        self.datePicker?.backgroundColor = UIColor.white
     }
     
     // MARK: - TimeEditPresenterDelegate methods
+    
+    func updateDatepickerWithVisibility(_ visible: Bool) {
+        self.datePickerContainerView?.isHidden = !visible
+    }
     
     func showTimeReportTitle(_ title: String?) {
         self.titleTextField?.text = title

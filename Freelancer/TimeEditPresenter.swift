@@ -9,14 +9,23 @@
 import UIKit
 import CoreData
 
+enum TimerState {
+    case none
+    case run
+    case pause
+    case increaseManually
+    case decreaseManually
+}
+
 protocol TimeEditPresenterDelegate: class {
     func showTimeReport(_ time: String?)
     func showTimeReportTitle(_ title: String?)
     func updateResumePauseButtonTitle(_ title: String)
+    func updateDatepickerWithVisibility(_ visible: Bool)
 }
 
 class TimeEditPresenter: NSObject {
-    private var isTimerRun = false
+    private var timerState = TimerState.none
     
     let interaction = TimeEditInteraction()
     var currentTimeID: NSManagedObjectID?
@@ -43,12 +52,29 @@ class TimeEditPresenter: NSObject {
     }
     
     func runStopTimer() {
-        self.isTimerRun = !self.isTimerRun
-        self.updateRunButtonTitle()
-        
-        if self.isTimerRun {
+        switch self.timerState {
+        case .run:
+            self.timerState = .pause
+            
+        case .pause:
+            self.timerState = .run
             self.runTimer()
+            
+        default:
+            break
         }
+        
+        self.updateRunButtonTitle()
+    }
+    
+    func increaseButtonHandler() {
+        self.timerState = .increaseManually
+        self.delegate?.updateDatepickerWithVisibility(true)
+    }
+    
+    func decreaseButtonHandler() {
+        self.timerState = .decreaseManually
+        self.delegate?.updateDatepickerWithVisibility(true)
     }
     
     // MARK: - Private methods
@@ -58,8 +84,12 @@ class TimeEditPresenter: NSObject {
             self.interaction.increaseTimeOneSecond()
             self.updateTime()
             
-            if self.isTimerRun {
+            switch self.timerState {
+            case .run:
                 self.runTimer()
+                
+            default:
+                break
             }
         })
     }
@@ -77,15 +107,18 @@ class TimeEditPresenter: NSObject {
     }
     
     private func updateRunButtonTitle() {
-        if self.isTimerRun {
+        switch self.timerState {
+        case .run:
             self.delegate?.updateResumePauseButtonTitle("Pause")
-        } else {
+            
+        case .pause:
             if let dateComponents = self.interaction.currentTime?.spent(), dateComponents.second == 0 && dateComponents.minute == 0 && dateComponents.hour == 0 {
                 self.delegate?.updateResumePauseButtonTitle("Start")
-                return
+            } else {
+                self.delegate?.updateResumePauseButtonTitle("Resume")
             }
-            
-            self.delegate?.updateResumePauseButtonTitle("Resume")
+        default:
+            break
         }
     }
 }

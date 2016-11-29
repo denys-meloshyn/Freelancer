@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -200,19 +201,67 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olv-gA-sBP">
+                                <rect key="frame" x="16" y="227" width="167.5" height="50"/>
+                                <color key="backgroundColor" red="0.12009541647928287" green="0.82616196065989844" blue="0.031086988756363593" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="syH-4o-FoV"/>
+                                </constraints>
+                                <state key="normal" title="Increase manually">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPh-GI-PDg">
+                                <rect key="frame" x="191.5" y="227" width="167.5" height="50"/>
+                                <color key="backgroundColor" red="0.82616196065989844" green="0.045631167183109882" blue="0.2248557178572313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="L3j-0B-Uzn"/>
+                                </constraints>
+                                <state key="normal" title="Decrease manually">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="joj-pL-MIS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJo-4V-Nwv">
+                                        <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="502138066.554748">
+                                            <!--2016-11-29 18:47:46 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="gJo-4V-Nwv" secondAttribute="trailing" id="01W-f9-19N"/>
+                                    <constraint firstItem="gJo-4V-Nwv" firstAttribute="leading" secondItem="joj-pL-MIS" secondAttribute="leading" id="14S-Yc-Tgu"/>
+                                    <constraint firstAttribute="bottom" secondItem="gJo-4V-Nwv" secondAttribute="bottom" id="xTH-51-YBT"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="HPh-GI-PDg" secondAttribute="trailing" constant="16" id="28b-tG-dKZ"/>
+                            <constraint firstAttribute="trailing" secondItem="joj-pL-MIS" secondAttribute="trailing" id="2zR-Ip-Mzi"/>
                             <constraint firstItem="GUa-Up-Ccy" firstAttribute="top" secondItem="cM4-kK-V6K" secondAttribute="bottom" constant="8" id="4t9-RA-f1t"/>
+                            <constraint firstItem="olv-gA-sBP" firstAttribute="width" secondItem="zj2-rK-uzs" secondAttribute="width" multiplier="1/2" constant="-4" id="6rO-1T-BF3"/>
                             <constraint firstItem="rLQ-dr-nHi" firstAttribute="top" secondItem="l7N-c0-Ubj" secondAttribute="bottom" constant="8" id="8Ry-md-lhR"/>
+                            <constraint firstItem="olv-gA-sBP" firstAttribute="top" secondItem="zj2-rK-uzs" secondAttribute="bottom" constant="8" id="9oG-8S-wTY"/>
                             <constraint firstItem="cM4-kK-V6K" firstAttribute="trailing" secondItem="kjJ-hR-cAi" secondAttribute="trailingMargin" id="NXf-Wx-GrH"/>
+                            <constraint firstItem="olv-gA-sBP" firstAttribute="leading" secondItem="kjJ-hR-cAi" secondAttribute="leading" constant="16" id="OgJ-zQ-1Ut"/>
                             <constraint firstAttribute="trailing" secondItem="GUa-Up-Ccy" secondAttribute="trailing" constant="16" id="TWk-Wi-SZ8"/>
                             <constraint firstItem="zj2-rK-uzs" firstAttribute="top" secondItem="GUa-Up-Ccy" secondAttribute="bottom" constant="8" id="Uym-aW-NDK"/>
                             <constraint firstAttribute="trailing" secondItem="zj2-rK-uzs" secondAttribute="trailing" constant="16" id="X2h-KP-eSV"/>
                             <constraint firstItem="rLQ-dr-nHi" firstAttribute="leading" secondItem="kjJ-hR-cAi" secondAttribute="leadingMargin" id="YeY-WE-myJ"/>
                             <constraint firstItem="zj2-rK-uzs" firstAttribute="leading" secondItem="kjJ-hR-cAi" secondAttribute="leading" constant="16" id="crA-Bq-iUd"/>
+                            <constraint firstItem="yDT-VG-ati" firstAttribute="top" secondItem="joj-pL-MIS" secondAttribute="bottom" id="flK-vs-6WV"/>
                             <constraint firstItem="cM4-kK-V6K" firstAttribute="leading" secondItem="kjJ-hR-cAi" secondAttribute="leadingMargin" id="k0g-6Q-CKR"/>
+                            <constraint firstItem="joj-pL-MIS" firstAttribute="leading" secondItem="kjJ-hR-cAi" secondAttribute="leading" id="lK4-9P-WL0"/>
+                            <constraint firstItem="joj-pL-MIS" firstAttribute="top" secondItem="kjJ-hR-cAi" secondAttribute="top" id="naj-GF-nGV"/>
+                            <constraint firstItem="HPh-GI-PDg" firstAttribute="top" secondItem="zj2-rK-uzs" secondAttribute="bottom" constant="8" id="qPq-lU-hAE"/>
                             <constraint firstItem="cM4-kK-V6K" firstAttribute="top" secondItem="rLQ-dr-nHi" secondAttribute="bottom" constant="8" id="rOK-I1-xRt"/>
+                            <constraint firstItem="HPh-GI-PDg" firstAttribute="leading" secondItem="olv-gA-sBP" secondAttribute="trailing" constant="8" id="sgc-jj-aj3"/>
                             <constraint firstItem="GUa-Up-Ccy" firstAttribute="leading" secondItem="kjJ-hR-cAi" secondAttribute="leading" constant="16" id="z5o-op-UnL"/>
                         </constraints>
                     </view>
@@ -223,6 +272,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4F-hL-QPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="Hs4-Ne-CqZ" customClass="TimeEditView" customModule="Freelancer" customModuleProvider="target">
                     <connections>
+                        <outlet property="datePicker" destination="gJo-4V-Nwv" id="wXD-mi-H97"/>
+                        <outlet property="datePickerContainerView" destination="joj-pL-MIS" id="J1e-8d-yJh"/>
+                        <outlet property="decreseButton" destination="HPh-GI-PDg" id="iJu-VY-y87"/>
+                        <outlet property="increaseButton" destination="olv-gA-sBP" id="1kg-sW-xz0"/>
                         <outlet property="runButton" destination="zj2-rK-uzs" id="5bZ-hg-D9j"/>
                         <outlet property="timeLabel" destination="GUa-Up-Ccy" id="PjT-Tn-Q8g"/>
                         <outlet property="titleTextField" destination="cM4-kK-V6K" id="6hM-9S-9rI"/>
