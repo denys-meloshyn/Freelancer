@@ -61,7 +61,7 @@ class TimesPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, Cont
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let time = self.interaction.time(for: indexPath)
-        self.router.presentTimeEditScreen(for: time?.objectID)
+        self.router.presentTimeEditScreen(for: time?.objectID, projectID: self.currentProjectID)
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
@@ -114,7 +114,7 @@ class TimesPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, Cont
     }
 
     func createNewTime() {
-        self.router.presentTimeEditScreen(for: self.currentProjectID)
+        self.router.presentTimeEditScreen(for: nil, projectID: self.currentProjectID)
     }
 
     // MARK: - TimePresenterDelegate methods

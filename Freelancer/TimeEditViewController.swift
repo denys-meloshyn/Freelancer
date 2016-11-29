@@ -11,12 +11,20 @@ import CoreData
 
 class TimeEditViewController: UIViewController {
     private var currentTime: LoggedTime?
+    private var currentProject: Project?
     private let managedObjectContext = ModelManager.createChildrenManagedObjectContext(from: ModelManager.sharedInstance.managedObjectContext)
 
     var currentTimeID: NSManagedObjectID?
+    var currentProjectID: NSManagedObjectID?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard let currentProjectID = self.currentProjectID else {
+            return
+        }
+
+        self.currentProject = self.managedObjectContext.object(with: currentProjectID) as? Project
 
         if let currentTimeID = self.currentTimeID {
             self.currentTime = self.managedObjectContext.object(with: currentTimeID) as? LoggedTime
@@ -24,6 +32,7 @@ class TimeEditViewController: UIViewController {
             self.currentTime = LoggedTime(context: self.managedObjectContext)
             self.currentTime?.title = "Title"
             self.currentTime?.start = NSDate()
+            self.currentProject?.addToRegisteredTimes(self.currentTime!)
         }
 
         self.currentTime?.finish = NSDate()

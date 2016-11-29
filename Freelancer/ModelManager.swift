@@ -68,7 +68,7 @@ class ModelManager {
         childrenManagedObjectContext.perform { () -> Void in
             ModelManager.saveContext(childrenManagedObjectContext)
 
-            childrenManagedObjectContext.parent?.perform({() -> Void in
+            parentManagedObjectContext.perform({() -> Void in
                ModelManager.saveContext(parentManagedObjectContext)
             })
         }
@@ -98,9 +98,12 @@ class ModelManager {
         return fetchedResultsController
     }
 
-    static func timeFetchedResultController(for project: NSManagedObjectID, with managedObjectContext: NSManagedObjectContext) -> NSFetchedResultsController<LoggedTime> {
+    static func timeFetchedResultController(for projectID: NSManagedObjectID, with managedObjectContext: NSManagedObjectContext) -> NSFetchedResultsController<LoggedTime> {
         let fetchRequest: NSFetchRequest<LoggedTime> = LoggedTime.fetchRequest()
         fetchRequest.fetchBatchSize = 30
+
+        let predicate = NSPredicate(format: "project == %@", projectID)
+        fetchRequest.predicate = predicate
 
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]

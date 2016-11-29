@@ -12,12 +12,13 @@ import CoreData
 class TimeRouter: NSObject {
     weak var viewController: UIViewController?
 
-    func presentTimeEditScreen(for timeID: NSManagedObjectID?) {
+    func presentTimeEditScreen(for timeID: NSManagedObjectID?, projectID: NSManagedObjectID?) {
         guard let timeEditViewController = self.viewController?.storyboard?.instantiateViewController(withIdentifier: "TimeEditViewController") as? TimeEditViewController else {
             return
         }
 
         timeEditViewController.currentTimeID = timeID
+        timeEditViewController.currentProjectID = projectID
         self.viewController?.navigationController?.pushViewController(timeEditViewController, animated: true)
     }
 }
