@@ -75,4 +75,14 @@ class TimesInteraction: NSObject, NSFetchedResultsControllerDelegate {
 
         return time
     }
+
+    func delete(_ time: LoggedTime) {
+        ModelManager.sharedInstance.managedObjectContext.delete(time)
+
+        self.saveProjectChanges()
+    }
+
+    func saveProjectChanges() {
+        ModelManager.saveContext(self.managedObjectContext)
+    }
 }

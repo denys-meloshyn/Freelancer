@@ -10,7 +10,10 @@ import UIKit
 import CoreData
 
 protocol TimePresenterDelegate: ContentInteractionDelegate {
+    func cancelEdit()
     func createCell(with title: String?, and detailText: String?) -> UITableViewCell?
+    func showDeleteDialog(with title: String, message: String, cancelTitle: String, deleteTitle: String, indexPath: IndexPath)
+    func createDeleteProjectRowAction(with title: String, and handler: @escaping (UITableViewRowAction, IndexPath) -> Swift.Void) -> UITableViewRowAction
 }
 
 class TimesPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, ContentInteractionDelegate {
@@ -70,22 +73,45 @@ class TimesPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, Cont
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        let deleteHandler = { (action: UITableViewRowAction, indexPath: IndexPath) in
-//            self.delegate?.showDeleteDialog(with: "Delete", message: "Do you want to delete the project?", cancelTitle: "Cancel", deleteTitle: "Delete", indexPath: indexPath)
-//
-//            return
-//        }
-//
-//        guard let deleteAction = self.delegate?.createDeleteProjectRowAction(with: "Delete", and: deleteHandler) else {
-//            return nil
-//        }
-//        
-//        return [deleteAction]
+        let deleteHandler = { (action: UITableViewRowAction, indexPath: IndexPath) in
+            self.delegate?.showDeleteDialog(with: "Delete", message: "Do you want to delete logged time?", cancelTitle: "Cancel", deleteTitle: "Delete", indexPath: indexPath)
 
-        return nil
+            return
+        }
+
+        guard let deleteAction = self.delegate?.createDeleteProjectRowAction(with: "Delete", and: deleteHandler) else {
+            return nil
+        }
+        
+        return [deleteAction]
     }
 
     // MARK: - Public methods
+
+    func confirmDeleteHandler(with indexPath: IndexPath) -> ((UIAlertAction) -> Swift.Void)? {
+        guard let time = self.interaction.time(for: indexPath) else {
+            return nil
+        }
+
+        let handler = { (alertAction: UIAlertAction) in
+            self.interaction.delete(time)
+            self.delegate?.cancelEdit()
+
+            return
+        }
+
+        return handler
+    }
+
+    func cancelDeleteHandler() -> ((UIAlertAction) -> Swift.Void)? {
+        let handler = { (alertAction: UIAlertAction) in
+            self.delegate?.cancelEdit()
+
+            return
+        }
+        
+        return handler
+    }
 
     func createNewTime() {
         self.router.presentTimeEditScreen(for: self.currentProjectID)

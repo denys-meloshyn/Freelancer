@@ -38,6 +38,28 @@ class TimesView: NSObject, TimePresenterDelegate {
 
     // MARK: - TimePresenterDelegate methods
 
+    func createDeleteProjectRowAction(with title: String, and handler: @escaping (UITableViewRowAction, IndexPath) -> Void) -> UITableViewRowAction {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: title, handler: handler)
+
+        return deleteAction
+    }
+    
+    func cancelEdit() {
+        self.tableView?.isEditing = false
+    }
+
+    func showDeleteDialog(with title: String, message: String, cancelTitle: String, deleteTitle: String, indexPath: IndexPath) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let deleteAction = UIAlertAction(title: deleteTitle, style: .destructive, handler: self.presenter.confirmDeleteHandler(with: indexPath))
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel, handler: self.presenter.cancelDeleteHandler())
+
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+
+        self.viewController?.present(alertController, animated: true, completion: nil)
+    }
+
     func createCell(with title: String?, and detailText: String?) -> UITableViewCell? {
         let cell = self.tableView?.dequeueReusableCell(withIdentifier: self.cellIdentifier)
 
