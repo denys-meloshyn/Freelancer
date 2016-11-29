@@ -36,6 +36,6 @@ public class Project: NSManagedObject {
             initDateComponents.second = initDateComponents.second! + second
         }
 
-        return nil
+        return initDateComponents
     }
 }

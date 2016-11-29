@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TimeEditView: NSObject {
+class TimeEditView: NSObject, TimeEditPresenterDelegate {
     @IBOutlet private var timeLabel: UILabel?
     @IBOutlet private var runButton: UIButton?
     @IBOutlet private var titleTextField: UITextField?
@@ -24,8 +24,8 @@ class TimeEditView: NSObject {
 
         self.presenter.currentTimeID = self.currentTimeID
         self.presenter.currentProjectID = self.currentProjectID
-//        self.presenter.delegate = self
-//        self.presenter.viewController = self.viewController
+        self.presenter.delegate = self
+        self.presenter.viewController = self.viewController
         self.presenter.initialConfiguration()
     }
 
@@ -34,5 +34,22 @@ class TimeEditView: NSObject {
     private func configureUserInterface() {
         let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self.presenter, action: #selector(TimeEditPresenter.saveChanges))
         self.viewController?.navigationItem.rightBarButtonItem = addBarButtonItem
+        
+        self.runButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.runStopTimer), for: .touchUpInside)
+        self.titleTextField?.addTarget(self.presenter, action: #selector(TimeEditPresenter.titleValueEdited(sender:)), for: .editingChanged)
+    }
+    
+    // MARK: - TimeEditPresenterDelegate methods
+    
+    func showTimeReportTitle(_ title: String?) {
+        self.titleTextField?.text = title
+    }
+    
+    func showTimeReport(_ time: String?) {
+        self.timeLabel?.text = time
+    }
+    
+    func updateResumePauseButtonTitle(_ title: String) {
+        self.runButton?.setTitle(title, for: .normal)
     }
 }

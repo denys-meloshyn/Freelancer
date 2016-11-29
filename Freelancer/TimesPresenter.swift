@@ -11,6 +11,7 @@ import CoreData
 
 protocol TimePresenterDelegate: ContentInteractionDelegate {
     func cancelEdit()
+    func showPageTitle(_ title: String?)
     func createCell(with title: String?, and detailText: String?) -> UITableViewCell?
     func showDeleteDialog(with title: String, message: String, cancelTitle: String, deleteTitle: String, indexPath: IndexPath)
     func createDeleteProjectRowAction(with title: String, and handler: @escaping (UITableViewRowAction, IndexPath) -> Swift.Void) -> UITableViewRowAction
@@ -29,6 +30,8 @@ class TimesPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, Cont
         self.interaction.currentProjectID = self.currentProjectID
         self.interaction.initialConfiguration()
         self.interaction.delegate = self
+        
+        self.delegate?.showPageTitle(self.interaction.currentProject?.title)
     }
 
     // MARK: - UITableViewDataSource methods
@@ -47,8 +50,7 @@ class TimesPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, Cont
         var spentTime = ""
         let calendar = Calendar.current
         if let dateComponents = time?.spent(), let date = calendar.date(from: dateComponents) {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "HH:mm:ss"
+            let formatter = Constants.defaultDateFormatter()
             spentTime = formatter.string(from: date)
         }
 

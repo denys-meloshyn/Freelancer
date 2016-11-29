@@ -38,10 +38,11 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let project = self.interaction.project(for: indexPath)
-
         var spentTime = ""
-        if let date = project.totalSpent()?.date {
-            let formatter = DateFormatter()
+        let calendar = Calendar.current
+        
+        if let dateComponents = project.totalSpent(), let date = calendar.date(from: dateComponents) {
+            let formatter = Constants.defaultDateFormatter()
             spentTime = formatter.string(from: date)
         }
 

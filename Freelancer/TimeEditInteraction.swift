@@ -10,10 +10,10 @@ import UIKit
 import CoreData
 
 class TimeEditInteraction: NSObject {
-    private var currentTime: LoggedTime?
     private var currentProject: Project?
     private let managedObjectContext = ModelManager.createChildrenManagedObjectContext(from: ModelManager.sharedInstance.managedObjectContext)
-
+    
+    var currentTime: LoggedTime?
     var currentTimeID: NSManagedObjectID?
     var currentProjectID: NSManagedObjectID?
 
@@ -28,17 +28,32 @@ class TimeEditInteraction: NSObject {
             self.currentTime = self.managedObjectContext.object(with: currentTimeID) as? LoggedTime
         } else {
             self.currentTime = LoggedTime(context: self.managedObjectContext)
-            self.currentTime?.title = "Title"
             self.currentTime?.start = NSDate()
             self.currentProject?.addToRegisteredTimes(self.currentTime!)
         }
-
-        self.currentTime?.finish = NSDate()
+        
         ModelManager.saveChildrenManagedObjectContext(self.managedObjectContext)
-        print("\(self.currentTime?.spent())")
     }
 
     func saveTimeEditChanges() {
         ModelManager.saveContext(self.managedObjectContext)
+    }
+    
+    func increaseTimeOneSecond() {
+        let calendar = Calendar.current
+        let units = Set<Calendar.Component>([.second])
+        
+        var initDateComponents = calendar.dateComponents(units, from: Date())
+        initDateComponents.second = 1
+        
+        guard let finishDate = self.currentTime?.finish else {
+            return
+        }
+        
+        self.currentTime?.finish = calendar.date(byAdding: initDateComponents, to: finishDate as Date) as NSDate?
+    }
+    
+    private func increaseTime(on date: DateComponents) {
+        
     }
 }

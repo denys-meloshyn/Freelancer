@@ -10,10 +10,10 @@ import UIKit
 import CoreData
 
 class TimesInteraction: NSObject, NSFetchedResultsControllerDelegate {
-    private var currentProject: Project?
     private let managedObjectContext = ModelManager.sharedInstance.managedObjectContext
     private var fetchedResultsController: NSFetchedResultsController<LoggedTime>?
-
+    
+    var currentProject: Project?
     weak var delegate: ContentInteractionDelegate?
     var currentProjectID: NSManagedObjectID? {
         didSet {

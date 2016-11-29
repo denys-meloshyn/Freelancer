@@ -37,6 +37,10 @@ class TimesView: NSObject, TimePresenterDelegate {
     }
 
     // MARK: - TimePresenterDelegate methods
+    
+    func showPageTitle(_ title: String?) {
+        self.viewController?.navigationItem.title = title
+    }
 
     func createDeleteProjectRowAction(with title: String, and handler: @escaping (UITableViewRowAction, IndexPath) -> Void) -> UITableViewRowAction {
         let deleteAction = UITableViewRowAction(style: .destructive, title: title, handler: handler)
