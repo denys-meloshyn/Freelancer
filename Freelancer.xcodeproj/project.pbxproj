@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1915D2E518987B20ADE337EF /* Pods_FreelancerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCFB66C56434B8738BCB1DB7 /* Pods_FreelancerUITests.framework */; };
+		570217721DED641D00A0F0FC /* TimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570217711DED641D00A0F0FC /* TimesViewController.swift */; };
+		570217751DED692B00A0F0FC /* ProjectsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570217741DED692B00A0F0FC /* ProjectsRouter.swift */; };
 		5764D7221DEC8B3D0084E1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7211DEC8B3D0084E1EF /* AppDelegate.swift */; };
 		5764D7271DEC8B3D0084E1EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5764D7251DEC8B3D0084E1EF /* Main.storyboard */; };
 		5764D72A1DEC8B3D0084E1EF /* Freelancer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5764D7281DEC8B3D0084E1EF /* Freelancer.xcdatamodeld */; };
@@ -48,6 +50,8 @@
 /* Begin PBXFileReference section */
 		1303A8D892A84722EB6BE939 /* Pods-FreelancerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreelancerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FreelancerUITests/Pods-FreelancerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3E26DE291A8E4CE0AB846040 /* Pods_FreelancerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreelancerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		570217711DED641D00A0F0FC /* TimesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesViewController.swift; sourceTree = "<group>"; };
+		570217741DED692B00A0F0FC /* ProjectsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsRouter.swift; sourceTree = "<group>"; };
 		5764D71E1DEC8B3D0084E1EF /* Freelancer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Freelancer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5764D7211DEC8B3D0084E1EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5764D7261DEC8B3D0084E1EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -117,6 +121,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		570217731DED683000A0F0FC /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				570217741DED692B00A0F0FC /* ProjectsRouter.swift */,
+			);
+			name = Router;
+			sourceTree = "<group>";
+		};
 		5764D7151DEC8B3D0084E1EF = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +159,7 @@
 				5764D7571DEC9C530084E1EF /* ModelManager */,
 				5764D75B1DEC9D860084E1EF /* Presenter */,
 				5764D7531DEC958E0084E1EF /* Resource */,
+				570217731DED683000A0F0FC /* Router */,
 				5764D75A1DEC9D800084E1EF /* View */,
 				5764D7521DEC957C0084E1EF /* ViewController */,
 			);
@@ -175,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				5764D7551DEC97A00084E1EF /* ProjectsViewController.swift */,
+				570217711DED641D00A0F0FC /* TimesViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -530,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5764D7621DECA0980084E1EF /* ProjectsInteraction.swift in Sources */,
+				570217721DED641D00A0F0FC /* TimesViewController.swift in Sources */,
 				5764D75E1DEC9DBE0084E1EF /* ProjectsView.swift in Sources */,
 				5764D7561DEC97A00084E1EF /* ProjectsViewController.swift in Sources */,
 				5764D7591DEC9C9A0084E1EF /* ModelManager.swift in Sources */,
@@ -538,6 +553,7 @@
 				57FCF7C71DECAFDB001C6480 /* LoggedTime+CoreDataClass.swift in Sources */,
 				5764D7221DEC8B3D0084E1EF /* AppDelegate.swift in Sources */,
 				57FCF7CA1DECAFDB001C6480 /* Project+CoreDataProperties.swift in Sources */,
+				570217751DED692B00A0F0FC /* ProjectsRouter.swift in Sources */,
 				57FCF7C81DECAFDB001C6480 /* LoggedTime+CoreDataProperties.swift in Sources */,
 				57FCF7C91DECAFDB001C6480 /* Project+CoreDataClass.swift in Sources */,
 			);

@@ -13,12 +13,12 @@ import CoreData
 public class LoggedTime: NSManagedObject {
     func spent() -> DateComponents? {
         let calendar = Calendar.current
-        let unitFlags = Set<Calendar.Component>([.hour, .year, .minute])
+        let units = Set<Calendar.Component>([.year, .month, .day, .hour, .second])
         
         guard let fromDate = self.start as? Date, let toDate = self.finish as? Date else {
             return nil
         }
         
-        return calendar.dateComponents(unitFlags, from: fromDate, to: toDate)
+        return calendar.dateComponents(units, from: fromDate, to: toDate)
     }
 }

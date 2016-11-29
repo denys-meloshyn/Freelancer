@@ -26,7 +26,7 @@ class ProjectsInteraction: NSObject, NSFetchedResultsControllerDelegate {
             self.fetchedResultsController.delegate = self
         }
         catch {
-            // Handle error
+            // TODO: error handling
         }
     }
     
@@ -64,9 +64,15 @@ class ProjectsInteraction: NSObject, NSFetchedResultsControllerDelegate {
         ModelManager.sharedInstance.saveContext(ModelManager.sharedInstance.managedObjectContext)
     }
     
-    func model(for indexPath: IndexPath) -> Project {
+    func project(for indexPath: IndexPath) -> Project {
         let event = self.fetchedResultsController.object(at: indexPath)
         
         return event
+    }
+
+    func delete(_ project: Project) {
+        ModelManager.sharedInstance.managedObjectContext.delete(project)
+
+        self.saveProjectChanges()
     }
 }

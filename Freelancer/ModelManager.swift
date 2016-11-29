@@ -76,4 +76,15 @@ class ModelManager {
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         return fetchedResultsController
     }
+
+    static func timeFetchedResultController(for project: NSManagedObjectID, with managedObjectContext: NSManagedObjectContext) -> NSFetchedResultsController<LoggedTime> {
+        let fetchRequest: NSFetchRequest<LoggedTime> = LoggedTime.fetchRequest()
+        fetchRequest.fetchBatchSize = 30
+
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultsController
+    }
 }

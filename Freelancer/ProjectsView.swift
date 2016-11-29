@@ -18,7 +18,7 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate {
     
     func initialConfiguration() {
         self.presenter.delegate = self
-//        self.presenter.viewController = self.viewController
+        self.presenter.viewController = self.viewController
         self.presenter.initialConfiguration()
         
         self.configureUserInterface()
@@ -62,7 +62,25 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate {
         
         self.viewController?.present(alertController, animated: true, completion: nil)
     }
-    
+
+    func showDeleteDialog(with title: String, message: String, cancelTitle: String, deleteTitle: String, indexPath: IndexPath) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let deleteAction = UIAlertAction(title: deleteTitle, style: .destructive, handler: self.presenter.confirmDeleteHandler(with: indexPath))
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel, handler: self.presenter.cancelDeleteHandler())
+
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+
+        self.viewController?.present(alertController, animated: true, completion: nil)
+    }
+
+    func createDeleteProjectRowAction(with title: String, and handler: @escaping (UITableViewRowAction, IndexPath) -> Void) -> UITableViewRowAction {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: title, handler: handler)
+
+        return deleteAction
+    }
+
     func createCell(with title: String?, and detailText: String?) -> UITableViewCell? {
         let cell = self.tableView?.dequeueReusableCell(withIdentifier: self.cellIdentifier)
         

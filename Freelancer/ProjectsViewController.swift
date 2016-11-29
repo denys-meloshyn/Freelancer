@@ -15,6 +15,5 @@ class ProjectsViewController: UIViewController {
         super.viewDidLoad()
         
         self.projectsView?.initialConfiguration()
-        // Do any additional setup after loading the view.
     }
 }
