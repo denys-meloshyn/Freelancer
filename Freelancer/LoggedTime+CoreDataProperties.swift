@@ -2,7 +2,7 @@
 //  LoggedTime+CoreDataProperties.swift
 //  
 //
-//  Created by Denys Meloshyn on 28.11.16.
+//  Created by Denys Meloshyn on 30/11/2016.
 //
 //
 
@@ -17,8 +17,8 @@ extension LoggedTime {
     }
 
     @NSManaged public var finish: NSDate?
-    @NSManaged public var start: NSDate?
     @NSManaged public var title: String?
+    @NSManaged public var start: NSDate?
     @NSManaged public var project: Project?
 
 }

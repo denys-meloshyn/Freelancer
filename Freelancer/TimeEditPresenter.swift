@@ -107,7 +107,8 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
         }
 
         self.hideDatePicker()
-        
+
+        self.updateRunButtonTitle()
         self.updateTime()
     }
 
@@ -163,6 +164,8 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
     
     private func runTimer() {
+        self.timerState = .run
+        self.timer?.invalidate()
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {[weak self] timer in
             self?.interaction?.increaseTimeOneSecond()
             self?.updateTime()

@@ -15,10 +15,10 @@ public class LoggedTime: NSManagedObject {
         let calendar = Calendar.current
         let units = Set<Calendar.Component>([.hour, .minute, .second])
         
-        guard let fromDate = self.start as? Date, let toDate = self.finish as? Date else {
+        guard let start = self.start as? Date, let finish = self.finish as? Date else {
             return nil
         }
         
-        return calendar.dateComponents(units, from: fromDate, to: toDate)
+        return calendar.dateComponents(units, from: start, to: finish)
     }
 }

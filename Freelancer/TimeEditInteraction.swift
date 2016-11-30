@@ -33,6 +33,7 @@ class TimeEditInteraction {
         } else {
             self.currentTime = LoggedTime(context: self.managedObjectContext)
             self.currentTime?.start = NSDate()
+            self.currentTime?.finish = NSDate()
             self.currentProject?.addToRegisteredTimes(self.currentTime!)
         }
         
@@ -44,10 +45,10 @@ class TimeEditInteraction {
     }
     
     func increaseTimeOneSecond() {
-        var initDateComponents = DateComponents()
-        initDateComponents.second = 1
+        var dateComponents = DateComponents()
+        dateComponents.second = 1
         
-        self.changeTime(on: initDateComponents)
+        self.currentTime?.finish = self.calculateTime(with: dateComponents)
     }
 
     func addDate(_ date: Date) {
@@ -55,7 +56,7 @@ class TimeEditInteraction {
         let units = Set<Calendar.Component>([.hour, .minute, .second])
 
         let dateComponents = calendar.dateComponents(units, from: date)
-        self.changeTime(on: dateComponents)
+        self.currentTime?.finish = self.calculateTime(with: dateComponents)
     }
 
     func substructDate(_ date: Date) {
@@ -70,19 +71,17 @@ class TimeEditInteraction {
 
         dateComponents.hour = -hour
         dateComponents.minute = -minute
+        let newDate = self.calculateTime(with: dateComponents)
 
-        self.changeTime(on: dateComponents)
-
-        guard let currentSpentTime = self.currentTime?.spent() else {
+        guard let startDate = self.currentTime?.start else {
             return
         }
 
-        guard let currentHour = currentSpentTime.hour, let currentMinute = currentSpentTime.minute, let currentSecond = currentSpentTime.second else {
-            return
-        }
-
-        if currentHour < 0 || currentMinute < 0 || currentSecond < 0 {
+        // Prevent from negative value
+        if newDate?.compare(startDate as Date) == ComparisonResult.orderedAscending {
             self.currentTime?.finish = self.currentTime?.start
+        } else {
+            self.currentTime?.finish = newDate
         }
     }
 
@@ -97,12 +96,13 @@ class TimeEditInteraction {
         return calendar.date(from: dateComponents)
     }
     
-    private func changeTime(on date: DateComponents) {
-        guard let finishDate = self.currentTime?.finish else {
-            return
-        }
-        
+    private func calculateTime(with dateComponents: DateComponents) -> NSDate? {
         let calendar = Calendar.current
-        self.currentTime?.finish = calendar.date(byAdding: date, to: finishDate as Date) as NSDate?
+
+        guard let time = self.currentTime?.finish else {
+            return nil
+        }
+
+        return calendar.date(byAdding: dateComponents, to: time as Date) as NSDate?
     }
 }
