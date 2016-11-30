@@ -21,9 +21,13 @@ class TimeEditViewController: UIViewController {
 
     var currentTimeID: NSManagedObjectID?
     var currentProjectID: NSManagedObjectID?
+    private var interaction: TimeEditInteraction?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.interaction = TimeEditInteraction()
+        self.timeEditView?.presenter.configure(with: self.interaction)
 
         self.timeEditView?.currentTimeID = self.currentTimeID
         self.timeEditView?.currentProjectID = self.currentProjectID

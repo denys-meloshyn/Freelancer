@@ -27,35 +27,40 @@ protocol TimeEditPresenterDelegate: class {
 class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     private var timer: Timer?
     private var timerState = TimerState.pause
-    
-    let interaction = TimeEditInteraction()
+
     var currentTimeID: NSManagedObjectID?
     var currentProjectID: NSManagedObjectID?
     weak var viewController: UIViewController?
+    weak var interaction: TimeEditInteraction?
     weak var delegate: TimeEditPresenterDelegate?
 
+    func configure(with interaction: TimeEditInteraction?) {
+        self.interaction = interaction
+    }
+
     func initialConfiguration() {
-        self.interaction.currentTimeID = self.currentTimeID
-        self.interaction.currentProjectID = self.currentProjectID
-        self.interaction.initialConfiguration()
+        self.interaction?.currentTimeID = self.currentTimeID
+        self.interaction?.currentProjectID = self.currentProjectID
+        self.interaction?.initialConfiguration()
         
-        self.delegate?.showTimeReportTitle(self.interaction.currentTime?.title)
+        self.delegate?.showTimeReportTitle(self.interaction?.currentTime?.title)
         self.updateTime()
         self.updateRunButtonTitle()
     }
     
     func titleValueEdited(sender: UITextField?) {
-        self.interaction.currentTime?.title = sender?.text
+        self.interaction?.currentTime?.title = sender?.text
     }
 
     func saveChanges() {
-        self.interaction.saveTimeEditChanges()
+        self.interaction?.saveTimeEditChanges()
     }
     
     func runStopTimer() {
         switch self.timerState {
         case .run:
             self.timerState = .pause
+            self.timer?.invalidate()
             
         case .pause:
             self.timerState = .run
@@ -99,21 +104,9 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     // MARK: - Private methods
     
     private func runTimer() {
-        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: {[weak self] timer in
-            self?.interaction.increaseTimeOneSecond()
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {[weak self] timer in
+            self?.interaction?.increaseTimeOneSecond()
             self?.updateTime()
-
-            guard let timerState = self?.timerState else {
-                return
-            }
-
-            switch timerState {
-            case .run:
-                self?.runTimer()
-                
-            default:
-                break
-            }
         })
     }
     
@@ -121,7 +114,7 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
         var time = ""
         let calendar = Calendar.current
         
-        if let dateComponents = self.interaction.currentTime?.spent(), let date = calendar.date(from: dateComponents) {
+        if let dateComponents = self.interaction?.currentTime?.spent(), let date = calendar.date(from: dateComponents) {
             let formatter = Constants.defaultDateFormatter()
             time = formatter.string(from: date)
         }
@@ -135,7 +128,7 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
             self.delegate?.updateResumePauseButtonTitle("Pause")
             
         case .pause:
-            if let dateComponents = self.interaction.currentTime?.spent(), dateComponents.second == 0 && dateComponents.minute == 0 && dateComponents.hour == 0 {
+            if let dateComponents = self.interaction?.currentTime?.spent(), dateComponents.second == 0 && dateComponents.minute == 0 && dateComponents.hour == 0 {
                 self.delegate?.updateResumePauseButtonTitle("Start")
             } else {
                 self.delegate?.updateResumePauseButtonTitle("Resume")
