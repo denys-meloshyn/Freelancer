@@ -177,8 +177,8 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
         let calendar = Calendar.current
         
         if let dateComponents = self.interaction?.currentTime?.spent(), let date = calendar.date(from: dateComponents) {
-            let formatter = Constants.defaultDateFormatter()
-            time = formatter.string(from: date)
+
+            time = "\"
         }
         
         self.delegate?.showTimeReport(time)
