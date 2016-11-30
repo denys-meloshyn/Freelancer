@@ -15,4 +15,12 @@ class Constants {
         
         return formatter
     }
+    
+    static func formatLoggedTime(dateComponents: DateComponents?) -> String {
+        guard let hour = dateComponents?.hour, let minute = dateComponents?.minute, let second = dateComponents?.second else {
+            return "00:00:00"
+        }
+        
+        return String(format: "%02u:%02u:%02u", hour, minute, second)
+    }
 }

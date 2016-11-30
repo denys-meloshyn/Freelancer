@@ -63,13 +63,7 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let project = self.interaction?.project(for: indexPath)
-        var spentTime = ""
-        let calendar = Calendar.current
-        
-        if let dateComponents = project?.totalSpent(), let date = calendar.date(from: dateComponents) {
-            let formatter = Constants.defaultDateFormatter()
-            spentTime = formatter.string(from: date)
-        }
+        let spentTime = Constants.formatLoggedTime(dateComponents: project?.totalSpent())
 
         guard let cell = self.delegate?.createCell(with: project?.title, and: spentTime) else {
             return UITableViewCell()

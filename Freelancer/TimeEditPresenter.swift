@@ -173,15 +173,7 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
     
     private func updateTime() {
-        var time = ""
-        let calendar = Calendar.current
-        
-        if let dateComponents = self.interaction?.currentTime?.spent(), let date = calendar.date(from: dateComponents) {
-
-            time = "\"
-        }
-        
-        self.delegate?.showTimeReport(time)
+        self.delegate?.showTimeReport(Constants.formatLoggedTime(dateComponents: self.interaction?.currentTime?.spent()))
     }
     
     private func updateRunButtonTitle() {

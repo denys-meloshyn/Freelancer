@@ -46,13 +46,7 @@ class TimesPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, Cont
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let time = self.interaction.time(for: indexPath)
-
-        var spentTime = ""
-        let calendar = Calendar.current
-        if let dateComponents = time?.spent(), let date = calendar.date(from: dateComponents) {
-            let formatter = Constants.defaultDateFormatter()
-            spentTime = formatter.string(from: date)
-        }
+        let spentTime = Constants.formatLoggedTime(dateComponents: time?.spent())
 
         guard let cell = self.delegate?.createCell(with: time?.title, and: spentTime) else {
             return UITableViewCell()

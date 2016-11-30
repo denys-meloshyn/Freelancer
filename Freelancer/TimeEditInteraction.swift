@@ -52,7 +52,8 @@ class TimeEditInteraction {
     func addDate(_ date: Date) {
         let calendar = Calendar.current
         let units = Set<Calendar.Component>([.hour, .minute, .second])
-
+        
+        // TODO: add max limit
         let dateComponents = calendar.dateComponents(units, from: date)
         self.currentTime?.finish = self.calculateTime(with: dateComponents)
     }
