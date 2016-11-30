@@ -21,11 +21,11 @@ protocol ProjectsInteractionDelegate: ContentInteractionDelegate {
 class ProjectsInteraction: NSObject, NSFetchedResultsControllerDelegate {
     weak var delegate: ProjectsInteractionDelegate?
     private var fetchedResultsController = ModelManager.projectsFetchedResultController(with: ModelManager.sharedInstance.managedObjectContext)
-    
+
     func initialConfiguration() {
         do {
-            try self.fetchedResultsController.performFetch()
             self.fetchedResultsController.delegate = self
+            try self.fetchedResultsController.performFetch()
         }
         catch {
             // TODO: error handling

@@ -36,8 +36,6 @@ class TimeEditInteraction {
             self.currentTime?.finish = NSDate()
             self.currentProject?.addToRegisteredTimes(self.currentTime!)
         }
-        
-        ModelManager.saveContext(self.managedObjectContext)
     }
 
     func saveTimeEditChanges() {

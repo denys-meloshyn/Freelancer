@@ -9,8 +9,9 @@
 import UIKit
 import CoreData
 
-protocol ProjectsPresenterDelegate: ContentInteractionDelegate {
+protocol ProjectsPresenterDelegate: ContentInteractionDelegate, LifeCycleStateProtocol {
     func cancelEdit()
+    func refreshContent()
     func createCell(with title: String?, and detailText: String?) -> UITableViewCell?
     func showDeleteDialog(with title: String, message: String, cancelTitle: String, deleteTitle: String, indexPath: IndexPath)
     func showCreateNewProjectDialog(with title:String, message messageText: String, create createTitle: String, cancel cancelTitle: String, placeholder textPlaceholder: String)
@@ -30,6 +31,24 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
     func initialConfiguration() {
         self.interaction?.initialConfiguration()
         self.interaction?.delegate = self
+    }
+
+    // MARK: - LifeCycleStateProtocol methods
+
+    func viewWillAppear(_ animated: Bool) {
+        self.delegate?.refreshContent()
+    }
+
+    func viewDidAppear(_ animated: Bool) {
+
+    }
+
+    func viewWillDisappear(_ animated: Bool) {
+
+    }
+
+    func viewDidDisappear(_ animated: Bool) {
+        
     }
     
     // MARK: - UITableViewDataSource methods

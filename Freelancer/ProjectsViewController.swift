@@ -23,4 +23,10 @@ class ProjectsViewController: UIViewController {
 
         self.projectsView?.initialConfiguration()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.projectsView?.viewWillAppear(animated)
+    }
 }

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ProjectsView: NSObject, ProjectsPresenterDelegate {
+class ProjectsView: NSObject, ProjectsPresenterDelegate, LifeCycleStateProtocol {
     weak var tableView: UITableView?
     var presenter: ProjectsPresenter
     weak var viewController: UIViewController?
@@ -38,8 +38,30 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate {
         self.tableView?.dataSource = self.presenter
         self.tableView?.delegate = self.presenter
     }
+
+    // MARK: - LifeCycleStateProtocol methods
+
+    func viewWillAppear(_ animated: Bool) {
+        self.presenter.viewWillAppear(animated)
+    }
+
+    func viewDidAppear(_ animated: Bool) {
+
+    }
+
+    func viewWillDisappear(_ animated: Bool) {
+
+    }
+
+    func viewDidDisappear(_ animated: Bool) {
+        
+    }
     
     // MARK: - ProjectsPresenterDelegate methods
+
+    func refreshContent() {
+        self.tableView?.reloadData()
+    }
     
     func cancelEdit() {
         self.tableView?.isEditing = false
