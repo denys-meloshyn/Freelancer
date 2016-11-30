@@ -99,7 +99,7 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
 
         switch self.timerState {
         case .decreaseManually:
-            self.interaction?.substructDate(datePickerValue)
+            self.interaction?.subtractDate(datePickerValue)
 
         case .increaseManually:
             self.interaction?.addDate(datePickerValue)

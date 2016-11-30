@@ -58,7 +58,7 @@ class TimeEditInteraction {
         self.currentTime?.finish = self.calculateTime(with: dateComponents)
     }
 
-    func substructDate(_ date: Date) {
+    func subtractDate(_ date: Date) {
         let calendar = Calendar.current
         let units = Set<Calendar.Component>([.hour, .minute, .second])
 
@@ -94,6 +94,8 @@ class TimeEditInteraction {
 
         return calendar.date(from: dateComponents)
     }
+    
+    // MARK: - Private functions
     
     private func calculateTime(with dateComponents: DateComponents) -> NSDate? {
         let calendar = Calendar.current
