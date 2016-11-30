@@ -9,13 +9,17 @@
 import UIKit
 import CoreData
 
-class TimeEditInteraction: NSObject {
+class TimeEditInteraction {
     private var currentProject: Project?
-    private let managedObjectContext = ModelManager.sharedInstance.managedObjectContext
+    private var managedObjectContext: NSManagedObjectContext
     
     var currentTime: LoggedTime?
     var currentTimeID: NSManagedObjectID?
     var currentProjectID: NSManagedObjectID?
+
+    init() {
+        self.managedObjectContext = ModelManager.createChildrenManagedObjectContext(from: ModelManager.sharedInstance.managedObjectContext)
+    }
 
     func initialConfiguration() {
         guard let currentProjectID = self.currentProjectID else {
@@ -36,7 +40,7 @@ class TimeEditInteraction: NSObject {
     }
 
     func saveTimeEditChanges() {
-        ModelManager.saveContext(self.managedObjectContext)
+        ModelManager.saveChildren(self.managedObjectContext)
     }
     
     func increaseTimeOneSecond() {

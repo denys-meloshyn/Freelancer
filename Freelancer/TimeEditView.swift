@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TimeEditView: NSObject, TimeEditPresenterDelegate {
+class TimeEditView: NSObject, TimeEditPresenterDelegate, LifeCycleStateProtocol {
     @IBOutlet private var timeLabel: UILabel?
     @IBOutlet private var runButton: UIButton?
     @IBOutlet private var decreseButton: UIButton?
@@ -19,9 +19,15 @@ class TimeEditView: NSObject, TimeEditPresenterDelegate {
     @IBOutlet private var datePickerContainerView: UIView?
     @IBOutlet private weak var viewController: UIViewController?
 
-    let presenter = TimeEditPresenter()
+    var presenter: TimeEditPresenter
     var currentTimeID: NSManagedObjectID?
     var currentProjectID: NSManagedObjectID?
+
+    override init() {
+        self.presenter = TimeEditPresenter()
+
+        super.init()
+    }
 
     func initialConfiguration() {
         self.configureUserInterface()
@@ -46,7 +52,25 @@ class TimeEditView: NSObject, TimeEditPresenterDelegate {
         
         self.datePicker?.backgroundColor = UIColor.white
     }
-    
+
+    // MARK: - LifeCycleStateProtocol methods
+
+    func viewWillAppear(_ animated: Bool) {
+
+    }
+
+    func viewDidAppear(_ animated: Bool) {
+
+    }
+
+    func viewWillDisappear(_ animated: Bool) {
+        self.presenter.viewWillDisappear(animated)
+    }
+
+    func viewDidDisappear(_ animated: Bool) {
+
+    }
+
     // MARK: - TimeEditPresenterDelegate methods
     
     func updateDatepickerWithVisibility(_ visible: Bool) {

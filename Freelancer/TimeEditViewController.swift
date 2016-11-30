@@ -9,6 +9,13 @@
 import UIKit
 import CoreData
 
+protocol LifeCycleStateProtocol: class {
+    func viewWillAppear(_ animated: Bool)
+    func viewDidAppear(_ animated: Bool)
+    func viewWillDisappear(_ animated: Bool)
+    func viewDidDisappear(_ animated: Bool)
+}
+
 class TimeEditViewController: UIViewController {
     @IBOutlet private var timeEditView: TimeEditView?
 
@@ -21,5 +28,11 @@ class TimeEditViewController: UIViewController {
         self.timeEditView?.currentTimeID = self.currentTimeID
         self.timeEditView?.currentProjectID = self.currentProjectID
         self.timeEditView?.initialConfiguration()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.timeEditView?.viewWillDisappear(animated)
     }
 }

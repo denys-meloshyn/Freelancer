@@ -24,8 +24,9 @@ protocol TimeEditPresenterDelegate: class {
     func updateDatepickerWithVisibility(_ visible: Bool)
 }
 
-class TimeEditPresenter: NSObject {
-    private var timerState = TimerState.none
+class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
+    private var timer: Timer?
+    private var timerState = TimerState.pause
     
     let interaction = TimeEditInteraction()
     var currentTimeID: NSManagedObjectID?
@@ -76,17 +77,39 @@ class TimeEditPresenter: NSObject {
         self.timerState = .decreaseManually
         self.delegate?.updateDatepickerWithVisibility(true)
     }
-    
+
+    // MARK: - LifeCycleStateProtocol methods
+
+    func viewWillAppear(_ animated: Bool) {
+
+    }
+
+    func viewDidAppear(_ animated: Bool) {
+
+    }
+
+    func viewWillDisappear(_ animated: Bool) {
+        self.timer?.invalidate()
+    }
+
+    func viewDidDisappear(_ animated: Bool) {
+        
+    }
+
     // MARK: - Private methods
     
     private func runTimer() {
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: {timer in
-            self.interaction.increaseTimeOneSecond()
-            self.updateTime()
-            
-            switch self.timerState {
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: {[weak self] timer in
+            self?.interaction.increaseTimeOneSecond()
+            self?.updateTime()
+
+            guard let timerState = self?.timerState else {
+                return
+            }
+
+            switch timerState {
             case .run:
-                self.runTimer()
+                self?.runTimer()
                 
             default:
                 break

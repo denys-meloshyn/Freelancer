@@ -9,11 +9,18 @@
 import UIKit
 
 class ProjectsViewController: UIViewController {
-    @IBOutlet private var projectsView: ProjectsView?
-    
+    @IBOutlet var projectsView: ProjectsView?
+
+    var router: ProjectsRouter?
+    var interaction: ProjectsInteraction?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        self.router = ProjectsRouter(with: self)
+        self.interaction = ProjectsInteraction()
+        self.projectsView?.presenter.configure(with: self.interaction, and: self.router)
+
         self.projectsView?.initialConfiguration()
     }
 }

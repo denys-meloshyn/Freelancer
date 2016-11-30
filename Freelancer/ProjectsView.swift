@@ -10,17 +10,22 @@ import UIKit
 import CoreData
 
 class ProjectsView: NSObject, ProjectsPresenterDelegate {
-    @IBOutlet private var tableView: UITableView?
-    @IBOutlet private weak var viewController: UIViewController?
-    
+    weak var tableView: UITableView?
+    var presenter: ProjectsPresenter
+    weak var viewController: UIViewController?
+
     private let cellIdentifier = "ProjectTableViewCell"
-    let presenter = ProjectsPresenter()
+
+    override init() {
+        self.presenter = ProjectsPresenter()
+
+        super.init()
+    }
     
     func initialConfiguration() {
         self.presenter.delegate = self
-        self.presenter.viewController = self.viewController
         self.presenter.initialConfiguration()
-        
+
         self.configureUserInterface()
     }
     

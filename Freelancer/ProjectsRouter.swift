@@ -9,8 +9,12 @@
 import UIKit
 import CoreData
 
-class ProjectsRouter: NSObject {
-    weak var viewController: UIViewController?
+class ProjectsRouter {
+    private weak var viewController: UIViewController?
+
+    init(with viewController: UIViewController) {
+        self.viewController = viewController
+    }
 
     func presentLoggedTimes(for projectID: NSManagedObjectID) {
         guard let timesViewController = self.viewController?.storyboard?.instantiateViewController(withIdentifier: "TimesViewController") as? TimesViewController else {

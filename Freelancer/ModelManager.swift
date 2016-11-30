@@ -60,7 +60,7 @@ class ModelManager {
         }
     }
 
-    static func saveChildrenManagedObjectContext(_ childrenManagedObjectContext: NSManagedObjectContext) {
+    static func saveChildren(_ childrenManagedObjectContext: NSManagedObjectContext) {
         guard let parentManagedObjectContext = childrenManagedObjectContext.parent else {
             return
         }

@@ -374,6 +374,7 @@
 				TargetAttributes = {
 					5764D71D1DEC8B3D0084E1EF = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 4ZT9N5NKNU;
 						ProvisioningStyle = Automatic;
 					};
 					5764D7341DEC8B3D0084E1EF = {
@@ -752,6 +753,7 @@
 			baseConfigurationReference = C5617284D0D3A159F3A0D45E /* Pods-Freelancer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4ZT9N5NKNU;
 				INFOPLIST_FILE = Freelancer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = denys.meloshyn.Freelancer;
@@ -765,6 +767,7 @@
 			baseConfigurationReference = 7C5DE5146E6FF74AF278D2C1 /* Pods-Freelancer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4ZT9N5NKNU;
 				INFOPLIST_FILE = Freelancer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = denys.meloshyn.Freelancer;

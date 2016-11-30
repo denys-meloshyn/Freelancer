@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import CocoaLumberjack
 
 protocol ContentInteractionDelegate: class {
     func didChangeContent()

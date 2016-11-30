@@ -18,35 +18,41 @@ protocol ProjectsPresenterDelegate: ContentInteractionDelegate {
 }
 
 class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, ProjectsInteractionDelegate {
-    let router = ProjectsRouter()
-    let interaction = ProjectsInteraction()
-    weak var viewController: UIViewController?
+    weak var router: ProjectsRouter?
+    weak var interaction: ProjectsInteraction?
     weak var delegate: ProjectsPresenterDelegate?
-    
-    func initialConfiguration() {
-        self.router.viewController = self.viewController
 
-        self.interaction.initialConfiguration()
-        self.interaction.delegate = self
+    func configure(with interaction: ProjectsInteraction?, and router: ProjectsRouter?) {
+        self.router = router
+        self.interaction = interaction
+    }
+
+    func initialConfiguration() {
+        self.interaction?.initialConfiguration()
+        self.interaction?.delegate = self
     }
     
     // MARK: - UITableViewDataSource methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return interaction.numberOfProjects()
+        guard let numberOfRowsInSection = self.interaction?.numberOfProjects() else {
+            return 0
+        }
+
+        return numberOfRowsInSection
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let project = self.interaction.project(for: indexPath)
+        let project = self.interaction?.project(for: indexPath)
         var spentTime = ""
         let calendar = Calendar.current
         
-        if let dateComponents = project.totalSpent(), let date = calendar.date(from: dateComponents) {
+        if let dateComponents = project?.totalSpent(), let date = calendar.date(from: dateComponents) {
             let formatter = Constants.defaultDateFormatter()
             spentTime = formatter.string(from: date)
         }
 
-        guard let cell = self.delegate?.createCell(with: project.title, and: spentTime) else {
+        guard let cell = self.delegate?.createCell(with: project?.title, and: spentTime) else {
             return UITableViewCell()
         }
         
@@ -56,8 +62,11 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
     // MARK: - UITableViewDelegate methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let project = self.interaction.project(for: indexPath)
-        self.router.presentLoggedTimes(for: project.objectID)
+        guard let project = self.interaction?.project(for: indexPath) else {
+            return
+        }
+
+        self.router?.presentLoggedTimes(for: project.objectID)
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
@@ -115,10 +124,13 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
                 return
             }
             
-            let newProject = self.interaction.createNewProject()
+            guard let newProject = self.interaction?.createNewProject() else {
+                return
+            }
+
             newProject.title = titleTextField.text
-            self.interaction.saveProjectChanges()
-            self.router.presentLoggedTimes(for: newProject.objectID)
+            self.interaction?.saveProjectChanges()
+            self.router?.presentLoggedTimes(for: newProject.objectID)
             
             return
         }
@@ -127,10 +139,12 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
     }
 
     func confirmDeleteHandler(with indexPath: IndexPath) -> ((UIAlertAction) -> Swift.Void)? {
-        let project = self.interaction.project(for: indexPath)
+        guard let project = self.interaction?.project(for: indexPath) else {
+            return nil
+        }
 
         let handler = { (alertAction: UIAlertAction) in
-            self.interaction.delete(project)
+            self.interaction?.delete(project)
             self.delegate?.cancelEdit()
 
             return
