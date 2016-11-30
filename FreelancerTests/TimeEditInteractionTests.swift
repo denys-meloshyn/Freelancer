@@ -94,6 +94,22 @@ class TimeEditInteractionTests: XCTestCase {
         XCTAssertEqual(expectedDate!.timeIntervalSinceReferenceDate, resultDate.timeIntervalSinceReferenceDate)
     }
     
+    func testAddManualExtraHourMultipleTimes() {
+        let value = 23
+        
+        let addDate = self.interaction.generateDate(with: value, minute: 0, second: 0)
+        self.interaction.addDate(addDate!)
+        self.interaction.addDate(addDate!)
+        self.interaction.addDate(addDate!)
+        
+        var startDateComponents = calendar.dateComponents(self.allUnits, from: self.time?.start! as! Date)
+        startDateComponents.hour = startDateComponents.hour! + value * 3
+        let expectedDate = self.calendar.date(from: startDateComponents)
+        
+        let resultDate = self.time?.finish! as! Date
+        XCTAssertEqual(expectedDate!.timeIntervalSinceReferenceDate, resultDate.timeIntervalSinceReferenceDate)
+    }
+    
     func testSusbtractManualMinuteTime() {
         let value = 20
         let substractValue = 10
