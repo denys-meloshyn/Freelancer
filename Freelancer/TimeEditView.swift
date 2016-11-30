@@ -48,6 +48,7 @@ class TimeEditView: NSObject, TimeEditPresenterDelegate, LifeCycleStateProtocol 
         self.increaseButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.increaseButtonHandler), for: .touchUpInside)
         self.decreseButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.decreaseButtonHandler), for: .touchUpInside)
         self.hideDatePickerButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.hideDatePicker), for: .touchUpInside)
+        self.datePicker?.addTarget(self.presenter, action: #selector(TimeEditPresenter.datePickerValueChanged(sender:)), for: .valueChanged)
         
         self.datePicker?.backgroundColor = UIColor.white
     }
@@ -71,6 +72,10 @@ class TimeEditView: NSObject, TimeEditPresenterDelegate, LifeCycleStateProtocol 
     }
 
     // MARK: - TimeEditPresenterDelegate methods
+
+    func updateDatePickerValue(_ date: Date) {
+        self.datePicker?.setDate(date, animated: true)
+    }
 
     func showSaveButton() {
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self.presenter, action: #selector(TimeEditPresenter.saveChanges))

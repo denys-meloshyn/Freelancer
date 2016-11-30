@@ -44,13 +44,57 @@ class TimeEditInteraction {
     }
     
     func increaseTimeOneSecond() {
-        let calendar = Calendar.current
-        let units = Set<Calendar.Component>([.second])
-        
-        var initDateComponents = calendar.dateComponents(units, from: Date())
+        var initDateComponents = DateComponents()
         initDateComponents.second = 1
         
         self.changeTime(on: initDateComponents)
+    }
+
+    func addDate(_ date: Date) {
+        let calendar = Calendar.current
+        let units = Set<Calendar.Component>([.hour, .minute, .second])
+
+        let dateComponents = calendar.dateComponents(units, from: date)
+        self.changeTime(on: dateComponents)
+    }
+
+    func substructDate(_ date: Date) {
+        let calendar = Calendar.current
+        let units = Set<Calendar.Component>([.hour, .minute, .second])
+
+        var dateComponents = calendar.dateComponents(units, from: date)
+
+        guard let hour = dateComponents.hour, let minute = dateComponents.minute else {
+            return
+        }
+
+        dateComponents.hour = -hour
+        dateComponents.minute = -minute
+
+        self.changeTime(on: dateComponents)
+
+        guard let currentSpentTime = self.currentTime?.spent() else {
+            return
+        }
+
+        guard let currentHour = currentSpentTime.hour, let currentMinute = currentSpentTime.minute, let currentSecond = currentSpentTime.second else {
+            return
+        }
+
+        if currentHour < 0 || currentMinute < 0 || currentSecond < 0 {
+            self.currentTime?.finish = self.currentTime?.start
+        }
+    }
+
+    func generateDate(with hours: Int, minute minutes: Int, second seconds: Int) -> Date? {
+        let calendar = Calendar.current
+
+        var dateComponents = DateComponents()
+        dateComponents.hour = hours
+        dateComponents.minute = minutes
+        dateComponents.second = seconds
+
+        return calendar.date(from: dateComponents)
     }
     
     private func changeTime(on date: DateComponents) {

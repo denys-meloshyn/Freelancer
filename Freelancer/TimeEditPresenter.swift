@@ -21,6 +21,7 @@ protocol TimeEditPresenterDelegate: class {
     func showSaveButton()
     func showApplyButton()
     func showTimeReport(_ time: String?)
+    func updateDatePickerValue(_ date: Date)
     func showTimeReportTitle(_ title: String?)
     func updateResumePauseButtonTitle(_ title: String)
     func updateDatepickerWithVisibility(_ visible: Bool)
@@ -28,6 +29,7 @@ protocol TimeEditPresenterDelegate: class {
 
 class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     private var timer: Timer?
+    private var datePickerValue: Date?
     private var timerState = TimerState.pause
 
     var currentTimeID: NSManagedObjectID?
@@ -78,26 +80,45 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
         self.stopTimer()
 
         self.timerState = .increaseManually
-        self.delegate?.updateDatepickerWithVisibility(true)
-        self.delegate?.showApplyButton()
+        self.resetAndPresentDatePicker()
     }
     
     func decreaseButtonHandler() {
         self.stopTimer()
 
         self.timerState = .decreaseManually
-        self.delegate?.updateDatepickerWithVisibility(true)
-        self.delegate?.showApplyButton()
+        self.resetAndPresentDatePicker()
     }
 
     func applyManualChanges() {
+        guard let datePickerValue = self.datePickerValue else {
+            self.timerState = .pause
+            return
+        }
+
+        switch self.timerState {
+        case .decreaseManually:
+            self.interaction?.substructDate(datePickerValue)
+
+        case .increaseManually:
+            self.interaction?.addDate(datePickerValue)
+        default:
+            break
+        }
+
         self.hideDatePicker()
+        
+        self.updateTime()
     }
 
     func hideDatePicker() {
         self.timerState = .pause
         self.delegate?.updateDatepickerWithVisibility(false)
         self.delegate?.showSaveButton()
+    }
+
+    func datePickerValueChanged(sender: UIDatePicker) {
+        self.datePickerValue = sender.date
     }
 
     // MARK: - LifeCycleStateProtocol methods
@@ -119,6 +140,21 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
 
     // MARK: - Private methods
+
+    private func resetAndPresentDatePicker() {
+        self.showDatePicker(with: 0, minute: 1, second: 0)
+        self.delegate?.updateDatepickerWithVisibility(true)
+        self.delegate?.showApplyButton()
+    }
+
+    private func showDatePicker(with hour: Int, minute minutes: Int, second seconds: Int) {
+        guard let date = self.interaction?.generateDate(with: hour, minute: minutes, second: seconds) else {
+            return
+        }
+
+        self.datePickerValue = date
+        self.delegate?.updateDatePickerValue(date)
+    }
 
     private func stopTimer() {
         self.timerState = .pause
