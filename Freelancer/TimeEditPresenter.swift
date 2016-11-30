@@ -58,6 +58,7 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
 
     func saveChanges() {
+        self.stopTimer()
         self.interaction?.saveTimeEditChanges()
     }
 
