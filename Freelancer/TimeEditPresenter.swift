@@ -18,6 +18,8 @@ enum TimerState {
 }
 
 protocol TimeEditPresenterDelegate: class {
+    func showSaveButton()
+    func showApplyButton()
     func showTimeReport(_ time: String?)
     func showTimeReportTitle(_ title: String?)
     func updateResumePauseButtonTitle(_ title: String)
@@ -42,7 +44,8 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
         self.interaction?.currentTimeID = self.currentTimeID
         self.interaction?.currentProjectID = self.currentProjectID
         self.interaction?.initialConfiguration()
-        
+
+        self.delegate?.showSaveButton()
         self.delegate?.showTimeReportTitle(self.interaction?.currentTime?.title)
         self.updateTime()
         self.updateRunButtonTitle()
@@ -55,15 +58,13 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     func saveChanges() {
         self.interaction?.saveTimeEditChanges()
     }
-    
+
     func runStopTimer() {
         switch self.timerState {
         case .run:
-            self.timerState = .pause
-            self.timer?.invalidate()
+            self.stopTimer()
             
         case .pause:
-            self.timerState = .run
             self.runTimer()
             
         default:
@@ -74,13 +75,29 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
     
     func increaseButtonHandler() {
+        self.stopTimer()
+
         self.timerState = .increaseManually
         self.delegate?.updateDatepickerWithVisibility(true)
+        self.delegate?.showApplyButton()
     }
     
     func decreaseButtonHandler() {
+        self.stopTimer()
+
         self.timerState = .decreaseManually
         self.delegate?.updateDatepickerWithVisibility(true)
+        self.delegate?.showApplyButton()
+    }
+
+    func applyManualChanges() {
+        self.hideDatePicker()
+    }
+
+    func hideDatePicker() {
+        self.timerState = .pause
+        self.delegate?.updateDatepickerWithVisibility(false)
+        self.delegate?.showSaveButton()
     }
 
     // MARK: - LifeCycleStateProtocol methods
@@ -98,10 +115,16 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
 
     func viewDidDisappear(_ animated: Bool) {
-        
+
     }
 
     // MARK: - Private methods
+
+    private func stopTimer() {
+        self.timerState = .pause
+        self.timer?.invalidate()
+        self.updateRunButtonTitle()
+    }
     
     private func runTimer() {
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {[weak self] timer in

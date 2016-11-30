@@ -224,6 +224,9 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="joj-pL-MIS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNE-iV-mcV">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </button>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJo-4V-Nwv">
                                         <rect key="frame" x="0.0" y="451" width="375" height="216"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -236,6 +239,10 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="gJo-4V-Nwv" secondAttribute="trailing" id="01W-f9-19N"/>
                                     <constraint firstItem="gJo-4V-Nwv" firstAttribute="leading" secondItem="joj-pL-MIS" secondAttribute="leading" id="14S-Yc-Tgu"/>
+                                    <constraint firstItem="nNE-iV-mcV" firstAttribute="top" secondItem="joj-pL-MIS" secondAttribute="top" id="237-QF-GMT"/>
+                                    <constraint firstItem="nNE-iV-mcV" firstAttribute="leading" secondItem="joj-pL-MIS" secondAttribute="leading" id="a90-OL-a6f"/>
+                                    <constraint firstAttribute="trailing" secondItem="nNE-iV-mcV" secondAttribute="trailing" id="bFX-43-BYA"/>
+                                    <constraint firstAttribute="bottom" secondItem="nNE-iV-mcV" secondAttribute="bottom" id="u6t-Bu-3pa"/>
                                     <constraint firstAttribute="bottom" secondItem="gJo-4V-Nwv" secondAttribute="bottom" id="xTH-51-YBT"/>
                                 </constraints>
                             </view>
@@ -275,6 +282,7 @@
                         <outlet property="datePicker" destination="gJo-4V-Nwv" id="wXD-mi-H97"/>
                         <outlet property="datePickerContainerView" destination="joj-pL-MIS" id="J1e-8d-yJh"/>
                         <outlet property="decreseButton" destination="HPh-GI-PDg" id="iJu-VY-y87"/>
+                        <outlet property="hideDatePickerButton" destination="nNE-iV-mcV" id="rvI-rS-3gA"/>
                         <outlet property="increaseButton" destination="olv-gA-sBP" id="1kg-sW-xz0"/>
                         <outlet property="runButton" destination="zj2-rK-uzs" id="5bZ-hg-D9j"/>
                         <outlet property="timeLabel" destination="GUa-Up-Ccy" id="PjT-Tn-Q8g"/>

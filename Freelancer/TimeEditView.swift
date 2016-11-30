@@ -16,6 +16,7 @@ class TimeEditView: NSObject, TimeEditPresenterDelegate, LifeCycleStateProtocol 
     @IBOutlet private var increaseButton: UIButton?
     @IBOutlet private var datePicker: UIDatePicker?
     @IBOutlet private var titleTextField: UITextField?
+    @IBOutlet private var hideDatePickerButton: UIButton?
     @IBOutlet private var datePickerContainerView: UIView?
     @IBOutlet private weak var viewController: UIViewController?
 
@@ -42,13 +43,11 @@ class TimeEditView: NSObject, TimeEditPresenterDelegate, LifeCycleStateProtocol 
     // MARK: - Private methods
 
     private func configureUserInterface() {
-        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self.presenter, action: #selector(TimeEditPresenter.saveChanges))
-        self.viewController?.navigationItem.rightBarButtonItem = addBarButtonItem
-        
         self.runButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.runStopTimer), for: .touchUpInside)
         self.titleTextField?.addTarget(self.presenter, action: #selector(TimeEditPresenter.titleValueEdited(sender:)), for: .editingChanged)
         self.increaseButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.increaseButtonHandler), for: .touchUpInside)
         self.decreseButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.decreaseButtonHandler), for: .touchUpInside)
+        self.hideDatePickerButton?.addTarget(self.presenter, action: #selector(TimeEditPresenter.hideDatePicker), for: .touchUpInside)
         
         self.datePicker?.backgroundColor = UIColor.white
     }
@@ -72,6 +71,16 @@ class TimeEditView: NSObject, TimeEditPresenterDelegate, LifeCycleStateProtocol 
     }
 
     // MARK: - TimeEditPresenterDelegate methods
+
+    func showSaveButton() {
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self.presenter, action: #selector(TimeEditPresenter.saveChanges))
+        self.viewController?.navigationItem.rightBarButtonItem = barButtonItem
+    }
+
+    func showApplyButton() {
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self.presenter, action: #selector(TimeEditPresenter.applyManualChanges))
+        self.viewController?.navigationItem.rightBarButtonItem = barButtonItem
+    }
     
     func updateDatepickerWithVisibility(_ visible: Bool) {
         self.datePickerContainerView?.isHidden = !visible
