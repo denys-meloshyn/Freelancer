@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CocoaLumberjack
 
 protocol ContentInteractionDelegate: class {
     func didChangeContent()
@@ -29,6 +30,7 @@ class ProjectsInteraction: NSObject, NSFetchedResultsControllerDelegate {
         }
         catch {
             // TODO: error handling
+            DDLogError("\(error)")
         }
     }
     

@@ -13,9 +13,4 @@ target 'Freelancer' do
     # Pods for testing
   end
 
-  target 'FreelancerUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
 end
