@@ -140,4 +140,35 @@ class TimeEditInteractionTests: XCTestCase {
         let resultDate = self.time?.finish! as! Date
         XCTAssertEqual(expectedDate.timeIntervalSinceReferenceDate, resultDate.timeIntervalSinceReferenceDate)
     }
+
+    func testSusbtractManualMultipleTimes() {
+        let addDate = self.interaction.generateDate(with: 0, minute: 40, second: 0)
+        self.interaction.addDate(addDate!)
+
+        let substractDate = self.interaction.generateDate(with: 0, minute: 10, second: 0)
+        self.interaction.subtractDate(substractDate!)
+        self.interaction.subtractDate(substractDate!)
+        self.interaction.subtractDate(substractDate!)
+
+        var startDateComponents = calendar.dateComponents(self.allUnits, from: self.time?.start! as! Date)
+        startDateComponents.minute = startDateComponents.minute! + 10
+        let expectedDate = self.calendar.date(from: startDateComponents)
+
+        let resultDate = self.time?.finish! as! Date
+        XCTAssertEqual(expectedDate!.timeIntervalSinceReferenceDate, resultDate.timeIntervalSinceReferenceDate)
+    }
+
+    func testSusbtractManualMultipleTimesMoreThanPossible() {
+        let addDate = self.interaction.generateDate(with: 0, minute: 1, second: 0)
+        self.interaction.addDate(addDate!)
+
+        let substractDate = self.interaction.generateDate(with: 0, minute: 10, second: 0)
+        self.interaction.subtractDate(substractDate!)
+        self.interaction.subtractDate(substractDate!)
+        self.interaction.subtractDate(substractDate!)
+
+        let expectedDate = self.time?.start! as! Date
+        let resultDate = self.time?.finish! as! Date
+        XCTAssertEqual(expectedDate.timeIntervalSinceReferenceDate, resultDate.timeIntervalSinceReferenceDate)
+    }
 }
