@@ -26,11 +26,10 @@ class TimeEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.interaction = TimeEditInteraction()
+        // Configure presenter with interaction object
+        self.interaction = TimeEditInteraction(withTimeID: self.currentTimeID, andProjectID: self.currentProjectID)
         self.timeEditView?.presenter.configure(with: self.interaction)
 
-        self.timeEditView?.currentTimeID = self.currentTimeID
-        self.timeEditView?.currentProjectID = self.currentProjectID
         self.timeEditView?.initialConfiguration()
     }
 

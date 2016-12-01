@@ -88,6 +88,7 @@ class ModelManager {
     }
     
     static func projectsFetchedResultController(with managedObjectContext: NSManagedObjectContext) -> NSFetchedResultsController<Project> {
+        // Create fetched results controller with all projects
         let fetchRequest: NSFetchRequest<Project> = Project.fetchRequest()
         fetchRequest.fetchBatchSize = 30
         
@@ -99,6 +100,7 @@ class ModelManager {
     }
 
     static func timeFetchedResultController(for projectID: NSManagedObjectID, with managedObjectContext: NSManagedObjectContext) -> NSFetchedResultsController<LoggedTime> {
+        // Create fetched results controller with all logged time for the project
         let fetchRequest: NSFetchRequest<LoggedTime> = LoggedTime.fetchRequest()
         fetchRequest.fetchBatchSize = 30
 

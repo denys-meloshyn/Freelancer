@@ -32,8 +32,6 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     private var datePickerValue: Date?
     private var timerState = TimerState.pause
 
-    var currentTimeID: NSManagedObjectID?
-    var currentProjectID: NSManagedObjectID?
     weak var viewController: UIViewController?
     weak var interaction: TimeEditInteraction?
     weak var delegate: TimeEditPresenterDelegate?
@@ -43,10 +41,9 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
 
     func initialConfiguration() {
-        self.interaction?.currentTimeID = self.currentTimeID
-        self.interaction?.currentProjectID = self.currentProjectID
         self.interaction?.initialConfiguration()
 
+        // Configure init view state
         self.delegate?.showSaveButton()
         self.delegate?.showTimeReportTitle(self.interaction?.currentTime?.title)
         self.updateTime()
@@ -78,6 +75,7 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
     
     func increaseButtonHandler() {
+        // Stop timer and show date picker
         self.stopTimer()
 
         self.timerState = .increaseManually
@@ -85,6 +83,7 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
     
     func decreaseButtonHandler() {
+        // Stop timer and show date picker
         self.stopTimer()
 
         self.timerState = .decreaseManually
@@ -97,6 +96,7 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
             return
         }
 
+        // Apply calculation
         switch self.timerState {
         case .decreaseManually:
             self.interaction?.subtractDate(datePickerValue)
@@ -107,8 +107,10 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
             break
         }
 
+        // Hide date picker
         self.hideDatePicker()
 
+        // Update timer label
         self.updateRunButtonTitle()
         self.updateTime()
     }
@@ -159,12 +161,14 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
 
     private func stopTimer() {
+        // Stop timer and update UI
         self.timerState = .pause
         self.timer?.invalidate()
         self.updateRunButtonTitle()
     }
     
     private func runTimer() {
+        // Activate timer and update UI
         self.timerState = .run
         self.timer?.invalidate()
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {[weak self] timer in
@@ -178,6 +182,7 @@ class TimeEditPresenter: NSObject, LifeCycleStateProtocol {
     }
     
     private func updateRunButtonTitle() {
+        // Configure timer button title
         switch self.timerState {
         case .run:
             self.delegate?.updateResumePauseButtonTitle("Pause")

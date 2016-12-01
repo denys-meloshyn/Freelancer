@@ -17,6 +17,7 @@ class ProjectsRouter {
     }
 
     func presentLoggedTimes(for projectID: NSManagedObjectID) {
+        // Present view controller with all logged times for project
         guard let timesViewController = self.viewController?.storyboard?.instantiateViewController(withIdentifier: "TimesViewController") as? TimesViewController else {
             return
         }

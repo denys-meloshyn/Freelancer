@@ -17,6 +17,7 @@ class ProjectsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Configure presenter object with router and interaction
         self.router = ProjectsRouter(with: self)
         self.interaction = ProjectsInteraction()
         self.projectsView?.presenter.configure(with: self.interaction, and: self.router)

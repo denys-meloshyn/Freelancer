@@ -11,13 +11,15 @@ import CoreData
 
 class TimeEditInteraction {
     private var currentProject: Project?
+    private var currentTimeID: NSManagedObjectID?
+    private var currentProjectID: NSManagedObjectID?
     private var managedObjectContext: NSManagedObjectContext
     
     var currentTime: LoggedTime?
-    var currentTimeID: NSManagedObjectID?
-    var currentProjectID: NSManagedObjectID?
 
-    init() {
+    init(withTimeID timeID: NSManagedObjectID?, andProjectID projectID: NSManagedObjectID?) {
+        self.currentTimeID = timeID
+        self.currentProjectID = projectID
         self.managedObjectContext = ModelManager.createChildrenManagedObjectContext(from: ModelManager.sharedInstance.managedObjectContext)
     }
 
@@ -53,7 +55,7 @@ class TimeEditInteraction {
         let calendar = Calendar.current
         let units = Set<Calendar.Component>([.hour, .minute, .second])
         
-        // TODO: add max limit
+        // TODO: add max limit?
         let dateComponents = calendar.dateComponents(units, from: date)
         self.currentTime?.finish = self.calculateTime(with: dateComponents)
     }

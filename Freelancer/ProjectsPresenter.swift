@@ -65,6 +65,7 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
         let project = self.interaction?.project(for: indexPath)
         let spentTime = Constants.formatLoggedTime(dateComponents: project?.totalSpent())
 
+        // Ask delegate to create a cell view
         guard let cell = self.delegate?.createCell(with: project?.title, and: spentTime) else {
             return UITableViewCell()
         }
@@ -79,6 +80,7 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
             return
         }
 
+        // Open selected project with logged times
         self.router?.presentLoggedTimes(for: project.objectID)
     }
 
@@ -107,6 +109,7 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
     // MARK: - Private methods
     
     private func isTitleValid(_ title: String?) -> Bool {
+        // Avoid empty title for project
         let trimmedTitle = self.removeWhiteSpacesIn(eventTitle: title)
         
         if let text = trimmedTitle, text.characters.count == 0 {
@@ -129,18 +132,22 @@ class ProjectsPresenter: NSObject, UITableViewDelegate, UITableViewDataSource, P
             guard let titleTextField = alertController.textFields?.first as UITextField? else {
                 return
             }
-            
+
+            // Remove all white spaces from text field
             titleTextField.text = self.removeWhiteSpacesIn(eventTitle: titleTextField.text)
             
             self.delegate?.cancelEdit()
+            // Check if input name is valid
             if !self.isTitleValid(titleTextField.text) {
                 return
             }
-            
+
+
             guard let newProject = self.interaction?.createNewProject() else {
                 return
             }
 
+            // Configure new project and present it
             newProject.title = titleTextField.text
             self.interaction?.saveProjectChanges()
             self.router?.presentLoggedTimes(for: newProject.objectID)

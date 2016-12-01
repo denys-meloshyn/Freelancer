@@ -48,7 +48,7 @@ class ProjectsInteraction: NSObject, NSFetchedResultsControllerDelegate {
         self.delegate?.changed(at: indexPath, for: type, newIndexPath: newIndexPath)
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     func numberOfProjects() -> Int {
         guard let section = self.fetchedResultsController.sections?.first else {

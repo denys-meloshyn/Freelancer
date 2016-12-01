@@ -32,6 +32,7 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate, LifeCycleStateProtocol 
     // MARK: - Private methods
     
     private func configureUserInterface() {
+        // Add button to create a new project
         let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self.presenter, action: #selector(ProjectsPresenter.showCreateNewProjectDialog))
         self.viewController?.navigationItem.rightBarButtonItem = addBarButtonItem
 
@@ -68,12 +69,15 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate, LifeCycleStateProtocol 
     }
     
     func showCreateNewProjectDialog(with title: String, message messageText: String, create createTitle: String, cancel cancelTitle: String, placeholder textPlaceholder: String) {
+        // Create alert controller with text field
         let alertController = UIAlertController(title: title, message: messageText, preferredStyle: .alert)
-        
+
+        // Configure create button
         let createAction = UIAlertAction(title: createTitle, style: .default, handler: self.presenter.createHandler(for: alertController))
         createAction.isEnabled = false
         alertController.addAction(createAction)
-        
+
+        // Configure cancel button
         let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel, handler:nil)
         alertController.addAction(cancelAction)
         
@@ -89,9 +93,12 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate, LifeCycleStateProtocol 
     }
 
     func showDeleteDialog(with title: String, message: String, cancelTitle: String, deleteTitle: String, indexPath: IndexPath) {
+        // Create alert controller to delete project
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
+        // Create delete button
         let deleteAction = UIAlertAction(title: deleteTitle, style: .destructive, handler: self.presenter.confirmDeleteHandler(with: indexPath))
+        // Create cancel button
         let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel, handler: self.presenter.cancelDeleteHandler())
 
         alertController.addAction(deleteAction)
@@ -101,12 +108,14 @@ class ProjectsView: NSObject, ProjectsPresenterDelegate, LifeCycleStateProtocol 
     }
 
     func createDeleteProjectRowAction(with title: String, and handler: @escaping (UITableViewRowAction, IndexPath) -> Void) -> UITableViewRowAction {
+        // Create row view to delete project
         let deleteAction = UITableViewRowAction(style: .destructive, title: title, handler: handler)
 
         return deleteAction
     }
 
     func createCell(with title: String?, and detailText: String?) -> UITableViewCell? {
+        // Create cell for project
         let cell = self.tableView?.dequeueReusableCell(withIdentifier: self.cellIdentifier)
         
         cell?.textLabel?.text = title

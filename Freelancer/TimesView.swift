@@ -29,6 +29,7 @@ class TimesView: NSObject, TimePresenterDelegate {
     // MARK: - Private methods
 
     private func configureUserInterface() {
+        // Show button to add time report
         let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self.presenter, action: #selector(TimesPresenter.createNewTime))
         self.viewController?.navigationItem.rightBarButtonItem = addBarButtonItem
 
@@ -53,6 +54,7 @@ class TimesView: NSObject, TimePresenterDelegate {
     }
 
     func showDeleteDialog(with title: String, message: String, cancelTitle: String, deleteTitle: String, indexPath: IndexPath) {
+        // Show alert warning to delete tim report
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let deleteAction = UIAlertAction(title: deleteTitle, style: .destructive, handler: self.presenter.confirmDeleteHandler(with: indexPath))
@@ -65,6 +67,7 @@ class TimesView: NSObject, TimePresenterDelegate {
     }
 
     func createCell(with title: String?, and detailText: String?) -> UITableViewCell? {
+        // Create time report cell view
         let cell = self.tableView?.dequeueReusableCell(withIdentifier: self.cellIdentifier)
 
         cell?.textLabel?.text = title

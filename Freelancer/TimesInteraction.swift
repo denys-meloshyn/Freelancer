@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CocoaLumberjack
 
 class TimesInteraction: NSObject, NSFetchedResultsControllerDelegate {
     private let managedObjectContext = ModelManager.sharedInstance.managedObjectContext
@@ -30,6 +31,7 @@ class TimesInteraction: NSObject, NSFetchedResultsControllerDelegate {
             }
             catch {
                  // TODO: error handling
+                DDLogError("\(error)")
             }
         }
     }

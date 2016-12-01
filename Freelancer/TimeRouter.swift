@@ -17,6 +17,7 @@ class TimeRouter: NSObject {
             return
         }
 
+        // Open view controller to edit time report
         timeEditViewController.currentTimeID = timeID
         timeEditViewController.currentProjectID = projectID
         self.viewController?.navigationController?.pushViewController(timeEditViewController, animated: true)

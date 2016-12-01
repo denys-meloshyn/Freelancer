@@ -12,8 +12,8 @@ import XCTest
 class TimeEditInteractionTests: XCTestCase {
     var time: LoggedTime?
     let calendar = Calendar.current
-    let interaction = TimeEditInteraction()
     let timeUnits = Set<Calendar.Component>([.hour, .minute, .second])
+    let interaction = TimeEditInteraction(withTimeID: nil, andProjectID: nil)
     let allUnits = Set<Calendar.Component>([.hour, .minute, .second, .year, .month, .day, .nanosecond])
     let managedObjectContext = ModelManager.createChildrenManagedObjectContext(from: ModelManager.sharedInstance.managedObjectContext)
     

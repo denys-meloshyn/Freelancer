@@ -21,8 +21,6 @@ class TimeEditView: NSObject, TimeEditPresenterDelegate, LifeCycleStateProtocol 
     @IBOutlet private weak var viewController: UIViewController?
 
     var presenter: TimeEditPresenter
-    var currentTimeID: NSManagedObjectID?
-    var currentProjectID: NSManagedObjectID?
 
     override init() {
         self.presenter = TimeEditPresenter()
@@ -33,8 +31,6 @@ class TimeEditView: NSObject, TimeEditPresenterDelegate, LifeCycleStateProtocol 
     func initialConfiguration() {
         self.configureUserInterface()
 
-        self.presenter.currentTimeID = self.currentTimeID
-        self.presenter.currentProjectID = self.currentProjectID
         self.presenter.delegate = self
         self.presenter.viewController = self.viewController
         self.presenter.initialConfiguration()
